@@ -1,0 +1,88 @@
+#!/usr/bin/python
+
+import urllib
+import urllib2
+import simplejson
+import sys
+import re
+import os
+urlencode = urllib.urlencode
+urlopen = urllib2.urlopen
+Request = urllib2.Request
+
+class DumpSearchScrape:
+  def __init__(self, term):
+    self.search_api = 'http://dump.fm/cmd/search'
+    self.term = urllib.quote_plus(term)
+    self.url = self.search_api + "/" + term
+  def showSelection(self, filelist):
+    if not os.path.exists("dumpselections"):
+      os.system("mkdir dumpselections")
+    f = open('dumpselections/index.html','w')
+    f.write("""
+      <html>
+      <head>
+      <link href="main.css" rel="stylesheet" type="text/css" />
+      </head>
+      <body>
+      """)
+    for file in filelist:
+      f.write("<img class='examplefiles' src='"+file+"'/>")
+    f.write("""
+      </body>
+      </html>
+      """)
+  def makeScrapelist (self, makepage=False, data=None):
+    headers = {
+      'User-Agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)',
+      'Accept': '*/*'
+      }
+    try:
+      req = Request(self.url, data, headers)
+      response = urlopen(req)
+      thejson = response.read()
+      urldata = simplejson.loads(thejson)  
+      urllist = []
+      for row in urldata:
+        url = ""
+        if "url" not in row:
+          continue
+        if row['url'][0] == "/":
+          url = "http://dump.fm/images" + row['url']
+          urllist.append(url)
+        else:
+          url = "http://" + row['url']
+          urllist.append(url)
+      terms = self.term.split('+')
+      for item in urllist:
+        parts = item.split('/')
+        theRe = ""
+        for term in terms:
+          new = '('+term+')*'
+          theRe = theRe+new
+        check = re.split(theRe, parts[-1])
+        for term in terms:
+          if term not in check:
+            urllist.remove(item)
+            break
+      if makepage == True:
+        self.showSelection(urllist)
+      return urllist[0]
+    except IOError, e:
+      if hasattr(e, 'code'):
+        print '%s - ERROR %s' % (self.url, e.code)
+        return None
+      else:
+        return response
+  
+if __name__ == '__main__':
+  term = sys.argv[1]
+  makepage = False
+  if len(sys.argv) > 2:
+    if str(sys.argv[2].lower())=='true':
+      makepage = True
+    else:
+      makepage = False
+  scrappy = DumpSearchScrape(term)
+  josh = scrappy.makeScrapelist(makepage)
+  print josh
