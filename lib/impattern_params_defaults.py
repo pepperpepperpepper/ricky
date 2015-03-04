@@ -3,7 +3,7 @@ import random
 from config import USERNAME, TEST_URL
 from lib.utils import Pb_Api_Params
 PATTERN_URL_BASE =  "http://asdf.us/impattern/patterns"
-class ImBreakParams_FromDefaults(Pb_Api_Params):
+class ImPatternParams_FromDefaults(Pb_Api_Params):
 #            "pattern_url",
 #            "pattern_data",
 #            "username",

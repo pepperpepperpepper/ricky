@@ -10,7 +10,7 @@ IMPATTERN_URL = "http://asdf.us/im/api/impattern"
 
 
 
-class ImGradient(Service):
+class ImPattern(Service):
     def __init__(self):
         self.url = IMPATTERN_URL
         self._required_keys = [
