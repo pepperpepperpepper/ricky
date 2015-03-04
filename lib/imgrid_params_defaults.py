@@ -4,7 +4,7 @@ from config import USERNAME, TEST_URL
 from lib.utils import Pb_Api_Params
 
 
-class ImGradientParams_FromDefaults(Pb_Api_Params):
+class ImGridParams_FromDefaults(Pb_Api_Params):
     def __init__(self):
         self.weighted_width = [
             { "value" : 400, "weight" : 1 }, 
@@ -33,7 +33,7 @@ class ImGradientParams_FromDefaults(Pb_Api_Params):
             {"value":random.randint(1,200),  "weight": 1},
         ]
         self.weighted_opacity = [
-            {"value":1.0,  "weight": 2},
+            {"value":1,  "weight": 2},
             {"value":0.5,  "weight": 1},
             {"value":float(random.randint(0,10)/10.0),  "weight": 1},
         ]
@@ -71,20 +71,20 @@ class ImGradientParams_FromDefaults(Pb_Api_Params):
             {"value": random.randint(-180,180),   "weight": 1},
         ]
         self.weighted_zoom = [
-            {"value": "",  "weight": 3},
-            {"value": random.randint(1,12),   "weight": 1},
-            {"value": random.randint(-1,-12),   "weight": 1},
+            {"value": 0,  "weight": 3},
+            {"value": float(random.randint(1,12)/2.0),   "weight": 1},
+            {"value": float(random.randint(-12,-1)/2.0),   "weight": 1},
         ]
         self.weighted_trim = [
             {"value":"",  "weight": 1},
             {"value":"true",   "weight": 1},
         ]
         self.weighted_transition = [
-            { "value" : "background", weight: 1 },
-            { "value" : "dither", weight: 1 },
-            { "value" : "random", weight: 1 },
-            { "value" : "tile", weight: 1 },
-            { "value" : "edge", weight: 1 },
+            { "value" : "background", "weight": 1 },
+            { "value" : "dither", "weight": 1 },
+            { "value" : "random", "weight": 1 },
+            { "value" : "tile", "weight": 1 },
+            { "value" : "edge", "weight": 1 },
         ]
         self.weighted_format = [
             {"value":"png",  "weight": 5},
