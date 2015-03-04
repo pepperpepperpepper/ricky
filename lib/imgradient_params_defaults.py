@@ -130,6 +130,48 @@ class ImGradientParams_FromDefaults(Pb_Api_Params):
             { "value" : "mirrored", "weight" : 1 }, 
             { "value" : "noise", "weight" : 1 }, 
         ]
+
+#I just needed a place to encapsulate the params and the weights, and methods to access them. I guess I didn't really know the right answer
+#as far as the structure, so I tried to just imagine something somewhat related to what you were talking about before.
+#do I need separate classes for the two methods below?
+#well lets dicusss this a bit more, so services each have own param set, they are sort of original from service itself, so i guess there should be a way to get
+#"fresh" copy of parameters accepted by this service, instead of rewriting code each time. do you mean just a list of the keynames? yeah and thier values
+#the keys don't have default values necessarily. they just each have a range of accepted values. Basically just html forms hmm sort of like
+#writing a bot that fills in some forms on the internet, like a bot to brute force a credit card form or something, funny example, but I guess a good one
+#each parameter has values that are within an accepted range, like First Name would need to come from a list of frist names, and CC number would need to bevel
+#intelligible ints, the first four should correspond with a known bank, etc. you understand what I mean? yeah
+ok so since all services are about same, just a bunch of parameters and known values we can make base class for parameteres. it would look like:
+
+
+class ApiParams(object):
+   def params():
+   def randomize():
+   def build():
+
+class ImGradientParams(ApiParams):
+   def __init__():
+     self.params = {
+       "width": # well here it's int i suppose, need somethig esle
+       "gradienttype": [
+         { "value "...}
+       ]
+     }
+   
+class ImGradientPb_Api():
+   def params():
+    return new ImGradientParams()
+   def call(params):
+    return image();
+
+
+api = ImGradientPb_Api()
+image_params = api.params()
+image_params.gradient_type("mirror")
+image_params.randomize()
+image = api.call(image _params)
+# something like this, yeah I think so...lol I tried to do something like this
+
+
     def from_random(self):
         return {
             "username" : USERNAME, 

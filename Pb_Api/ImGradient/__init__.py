@@ -4,13 +4,13 @@ import urllib2
 import simplejson as json
 import random
 import sys
-from lib.utils import post_request, Service
+from lib.utils import post_request, Pb_Api
+
 
 IMGRADIENT_URL = "http://asdf.us/im/api/imgradient"
+#from Api.ImGradient.Api import * 
 
-
-
-class ImGradient(Service):
+class ImGradientApi(Pb_Api):
     def __init__(self):
         self.url = IMGRADIENT_URL
         self._required_keys = [
@@ -28,10 +28,3 @@ class ImGradient(Service):
             "gradienttype", 
             "username",
         ] 
-    def new(self, params):
-        for k in self._required_keys:
-            if not k in params:
-                params[k] = "";
-        self.params = params
-        return json.loads(post_request(IMGRADIENT_URL, self.params))
-     
