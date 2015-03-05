@@ -3,6 +3,7 @@ from Pb_Api.Param import Pb_Api_Param
 class Pb_Api_Param_MultiSelect(Pb_Api_Param):
     def __init__(self, *args, **kwargs):
       super(Pb_Api_Param_MultiSelect, self).__init__(*args, **kwargs) 
+      self._options = kwargs['options']
     def options(self):
       return self._options
     def value(self, *args):
