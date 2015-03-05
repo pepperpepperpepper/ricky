@@ -1,8 +1,10 @@
 class Pb_Api_Param(object):
+    def __init__(self, *args, **kwargs):
+      self.value(args, kwargs)
     def name(self):
-      return self.name
+      return self._name
     def required(self):
-      return self.required
+      return self._required
 
     def manually_set(self, *args):
       if len(args) >= 1:

@@ -1,19 +1,11 @@
 #!/usr/bin/python2.7
-import urllib
-import urllib2
-import simplejson as json
-import random
-import sys
-from lib.utils import post_request, Pb_Api
+from Pb_Api import Pb_Api
+from Pb_Api.ImPattern.Params import ImPattern_Params
 
 IMPATTERN_URL = "http://asdf.us/im/api/impattern"
 
-#ok what about here?
-
-class ImPattern(Pb_Api):
+class Pb_Api_ImPattern(Pb_Api):
     def __init__(self):
         self.url = IMPATTERN_URL
     def params(self):
         return ImPattern_Params() 
-
-
