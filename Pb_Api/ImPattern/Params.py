@@ -14,5 +14,5 @@ class ImPattern_Params(Pb_Api_Params):
         self.params = [
            Pb_Api_Param_Username(name="username", required=1), 
            Pb_Api_Param_Image_Url(name="image_url", required=1),
-#           Pb_Api_Param_MultiSelect(name="pattern_url", required=1, options=pattern_url_options)
+           Pb_Api_Param_MultiSelect(name="pattern_url", required=1, options=pattern_url_options)
         ]
