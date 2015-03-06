@@ -18,6 +18,7 @@ class Pb_Api:
     def post_request(self, url, params):
         params = urllib.urlencode(params)
         sys.stderr.write(params)
+        sys.stderr.write(url)
         headers = {
             "Content-type": "application/x-www-form-urlencoded",
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36",

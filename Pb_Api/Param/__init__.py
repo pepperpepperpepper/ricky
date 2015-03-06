@@ -6,7 +6,7 @@ class Pb_Api_Param(object):
       self._value_default = None
       self.name = name
       self.required = required
-      self.is_ready = 0 #should I try that?
+      self.is_ready = 0 
       self.value = value
       self.set_by_user = set_by_user
     def __str__(self):
@@ -20,7 +20,7 @@ class Pb_Api_Param(object):
       self._value = value
       if not self._value is None:
         self.is_ready = 1
-      self.set_by_user = 1 #like that? yeah also need method for setting default value
+      self.set_by_user = 1 
     value = property(get_value, set_value)   
     
     def default(self, value):
