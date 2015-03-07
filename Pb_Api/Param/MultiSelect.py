@@ -21,11 +21,8 @@ class Pb_Api_Param_MultiSelect(Pb_Api_Param):
       return super(Pb_Api_Param_MultiSelect, self).get_value()
     @value.setter
     def value(self, value):
-      valid = False
-      for i in self.options():
-        if value == i['value']: valid = True
-      if value is None: valid = True
-      if not valid : raise ValueError 
+      if not any([ value == i['value'] for i in self.options() ]) and value != None:
+        raise ValueError 
       super(Pb_Api_Param_MultiSelect, self).set_value(value)
 
     def randomize(self):
