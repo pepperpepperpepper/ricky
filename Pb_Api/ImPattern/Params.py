@@ -18,14 +18,6 @@ class Pattern_Url_Option(Pb_Api_Param_Option):
     formatted = "{}/{}.png".format(PATTERN_BASE_URL, kwargs["value"])
     return cls(weight=kwargs["weight"], value=formatted )
 
-
-pattern_url_options = Pb_Api_Param_Options([  
-  Pattern_Url_Option.from_name(weight=0, value=i) for i in range(1,100) ] + [
-  Pattern_Url_Option.from_name(weight=0, value="a{}".format(i)) for i in range(0, 42) 
-])
-
-pattern_url_options.search("a10").weight = 20;
-
 class ImPattern_Params(Pb_Api_Params): 
     def __init__(self):
         self.params = [
@@ -33,3 +25,10 @@ class ImPattern_Params(Pb_Api_Params):
            Pb_Api_Param_Image_Url(name="image_url", required=1),
            Pb_Api_Param_MultiSelect(name="pattern_url", required=1, options=pattern_url_options)
         ]
+
+pattern_url_options = Pb_Api_Param_Options([  
+  Pattern_Url_Option.from_name(weight=0, value=i) for i in range(1,100) ] + [
+  Pattern_Url_Option.from_name(weight=0, value="a{}".format(i)) for i in range(0, 42) 
+])
+
+pattern_url_options.search("a10").weight = 20;

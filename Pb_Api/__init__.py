@@ -32,4 +32,4 @@ class Pb_Api:
             sys.stderr.write(str(e))
             raise 
     def call(self, params):  
-        return json.loads(self.post_request(self.url, params))
+        return json.loads(self.post_request(self.url, params.as_hash()))
