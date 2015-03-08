@@ -9,6 +9,7 @@ class Pb_Api_Param_MultiSelect(Pb_Api_Param):
         self._validate_options()
         self.default(self._choose_heaviest())
 
+
     def options(self):
       return self._options
     def _validate_options(self):

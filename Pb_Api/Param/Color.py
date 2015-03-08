@@ -8,6 +8,7 @@ class Pb_Api_Param_Color(Pb_Api_Param_MultiSelect):
     def from_rgb(cls, r,g,b):
       return cls(value="rgb({},{},{})".format(r,g,b))
     
+
     def randomize(self):
        weights_total = sum(map(lambda x: x["weight"], self.options()) +  (255 * 255 * 255) 
        choice = random.randint(0, weights_total)
