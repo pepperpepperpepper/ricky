@@ -2,9 +2,10 @@ import random
 from Pb_Api.Param import Pb_Api_Param 
 
 class Pb_Api_Param_MultiSelect(Pb_Api_Param):
-    def __init__(self, *args, **kwargs):
-      self._options = kwargs['options'] if options in kwargs else []
-      super(Pb_Api_Param_MultiSelect, self).__init__(*args, **kwargs) 
+    def __init__(self, **kwargs):
+      self._options = []
+      if 'options' in kwargs: self._options = kwargs['options'] or []
+      super(Pb_Api_Param_MultiSelect, self).__init__(**kwargs) 
       if len(self._options): 
         self._validate_options()
         self.default(self._choose_heaviest())
@@ -19,14 +20,14 @@ class Pb_Api_Param_MultiSelect(Pb_Api_Param):
       except Exception as e:
         raise ValueError
 
-    @property
-    def value(self):
+    def get_value(self):
       return super(Pb_Api_Param_MultiSelect, self).get_value()
-    @value.setter
-    def value(self, value):
-      if not any([ value == i['value'] for i in self.options() ]) and value != None:
+    def set_value(self, value):
+      if not any([ value == i['value'] for i in self._options ]) and value != None:
         raise ValueError 
       super(Pb_Api_Param_MultiSelect, self).set_value(value)
+    value = property(get_value, set_value)   
+
 
     def randomize(self):
        weights_total = sum(map(lambda x: x["weight"], self.options()))
@@ -48,7 +49,7 @@ class Pb_Api_Param_MultiSelect(Pb_Api_Param):
                 heaviest_weight = elem["weight"]
                 heaviest_idx = idx;
             idx += 1
-         self.value = self.options()[heaviest_idx]["value"]
+         return self.options()[heaviest_idx]["value"]
        else:
          self.randomize()
     def heaviest(self):

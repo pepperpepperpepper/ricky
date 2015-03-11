@@ -1,3 +1,4 @@
+import sys
 import pprint
 class Pb_Api_Params(object):
   def __init__(self):
@@ -24,13 +25,13 @@ class Pb_Api_Params(object):
   def api(self, cls):
     self._api = cls
 
-  #does this really have to be here in Pb_Api_Params? seems confusing though  yeah it has to be here because ImPattern inherits from it? impatter params 
   def execute(self):
     return self.api.call(self)
 
   def is_ready(self):
     for p in self.params:
-      if not p.is_ready():
+      if not p.is_ready and not p.default:
+        sys.stderr.write("param not ready: {}".format(p))
         return 0
     return 1
   def as_hash(self):

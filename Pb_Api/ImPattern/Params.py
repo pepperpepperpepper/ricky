@@ -26,7 +26,7 @@ class ImPattern_Params(Pb_Api_Params):
            Pb_Api_Param_MultiSelect(name="pattern_url", required=1, options=pattern_url_options)
         ]
 
-pattern_url_options = Pb_Api_Param_Options([  
+pattern_url_options = Pb_Api_Param_Options(*[
   Pattern_Url_Option.from_name(weight=0, value=i) for i in range(1,100) ] + [
   Pattern_Url_Option.from_name(weight=0, value="a{}".format(i)) for i in range(0, 42) 
 ])

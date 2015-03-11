@@ -1,0 +1,58 @@
+import re, random
+from Pb_Api.Params import Pb_Api_Params 
+from Pb_Api.Param import Pb_Api_Param
+from Pb_Api.Param.Option import Pb_Api_Param_Option
+from Pb_Api.Param.Options import Pb_Api_Param_Options
+from Pb_Api.Param.Username import Pb_Api_Param_Username
+from Pb_Api.Param.Image_Url import Pb_Api_Param_Image_Url
+from Pb_Api.Param.MultiSelect import Pb_Api_Param_MultiSelect
+from Pb_Api.Param.NumberRange import Pb_Api_Param_NumberRange
+from Pb_Api.Param.Color import Pb_Api_Param_Color
+from config import PATTERN_BASE_URL
+
+
+breaktype_options = Pb_Api_Param_Options.from_dict(
+    {"value":"CLASSIC",         "weight": 1},
+    {"value":"REDUX",           "weight": 1},
+    {"value":"BLURRY_BREAK",    "weight": 1},
+    {"value":"BLURRY_BREAK_2",  "weight": 1},
+    {"value":"SWIPE",           "weight": 1},
+    {"value":"RGB_WASH",        "weight": 1},
+    {"value":"RGB_WASH_2",      "weight": 1},
+    {"value":"NOISY_BREAK",     "weight": 1},
+    {"value":"BROKEN_VIGNETTE", "weight": 1},
+    {"value":"FAX_MACHINE",     "weight": 1},
+    {"value":"STRIPES",         "weight": 1},
+    {"value":"PHOTOCOPY",       "weight": 1}, 
+)
+breakmode_options = Pb_Api_Param_Options.from_dict(
+    {"value":"extreme",  "weight": 1},
+    {"value":"subtle",  "weight": 1},
+)
+finalformat_options = Pb_Api_Param_Options.from_dict(
+    {"value":"png",  "weight": 5},
+    {"value":"jpg",  "weight": 2},
+    {"value":"gif",  "weight": 2},
+)
+breakangle_options = Pb_Api_Param_Options.from_dict(
+    {"value":0,  "weight": 9},
+    {"value":90,  "weight": 2},
+    {"value":-180,  "weight": 2},
+    {"value":180,  "weight": 2},
+)
+expanded_options = Pb_Api_Param_Options.from_dict(
+    {"value": "" , "weight": 11 },
+    {"value": 1, "weight": 2}
+) 
+   
+class ImBreak_Params(Pb_Api_Params): 
+    def __init__(self):
+        self.params = [
+           Pb_Api_Param_Username(name="username", required=0), 
+           Pb_Api_Param_Image_Url(name="url", required=1),
+           Pb_Api_Param_MultiSelect(name="finalformat", required=0, options=finalformat_options),
+           Pb_Api_Param_MultiSelect(name="breaktype", required=1, options=breaktype_options),
+           Pb_Api_Param_NumberRange(name="breakangle", required=0, options=breakangle_options, min=-180, max=180),
+           Pb_Api_Param_MultiSelect(name="breakmode", required=1, options=breakmode_options),
+           Pb_Api_Param_MultiSelect(name="expanded", required=0, options=expanded_options),
+        ]

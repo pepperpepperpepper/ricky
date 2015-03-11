@@ -32,4 +32,6 @@ class Pb_Api:
             sys.stderr.write(str(e))
             raise 
     def call(self, params):  
+        if not(params.is_ready()):
+          raise Exception( "Api Params Not Ready")
         return json.loads(self.post_request(self.url, params.as_hash()))
