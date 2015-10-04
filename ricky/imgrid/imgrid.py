@@ -1,8 +1,8 @@
-from ricky.api import Api
+from ricky.api import Im
 from ricky.imgrid.params import ImGridParams
 from ricky.config import IMGRID_URL
 
-class ImGrid(Api):
+class ImGrid(Im):
     def __init__(self):
         self.url = IMGRID_URL
     def params_init(self):

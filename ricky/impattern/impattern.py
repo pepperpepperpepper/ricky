@@ -1,8 +1,8 @@
-from ricky.api import Api
+from ricky.api import Im
 from ricky.impattern.params import ImPatternParams
 from ricky.config import IMPATTERN_URL
 
-class ImPattern(Api):
+class ImPattern(Im):
     def __init__(self):
         self.url = IMPATTERN_URL
     def params_init(self):

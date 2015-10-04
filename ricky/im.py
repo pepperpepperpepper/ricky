@@ -5,7 +5,7 @@ import random
 import simplejson as json
 import urllib2
 
-class Api:
+class Im:
     def __init__(self):
         self._required_keys = []
         self.url = ""
@@ -25,5 +25,5 @@ class Api:
             raise
     def call(self, params):
         if not(params.is_ready()):
-          raise Exception("Api Params Not Ready")
+          raise Exception("Im Params Not Ready")
         return json.loads(self.post_request(self.url, params.as_hash()))

@@ -1,8 +1,8 @@
-from ricky.api import Api
+from ricky.api import Im
 from ricky.imgradient.params import ImGradientParams
 from ricky.config import IMGRADIENT_URL
 
-class ImGradient(Api):
+class ImGradient(Im):
     def __init__(self):
         self.url = IMGRADIENT_URL
     def params_init(self):
