@@ -59,7 +59,7 @@ class Param_Opacity(NumberRange):
 
 class ImGridParams(Params):
     def __init__(self):
-        self.params = [
+        self._params = [
            Username(name="username", required=0),
            ImageUrl(name="bgimage", required=0),
            ImageUrl(name="imageinstead", required=0),

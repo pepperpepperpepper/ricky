@@ -19,7 +19,7 @@ class Pattern_UrlOption(Option):
 
 class ImPatternParams(Params):
     def __init__(self):
-        self.params = [
+        self._params = [
            Username(name="username", required=0),
            ImageUrl(name="image_url", required=1),
            MultiSelect(name="pattern_url", required=1, options=pattern_url_options)

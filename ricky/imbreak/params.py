@@ -46,7 +46,7 @@ expanded_options = Options.from_dict(
 
 class ImBreakParams(Params):
     def __init__(self):
-        self.params = [
+        self._params = [
            Username(name="username", required=0),
            ImageUrl(name="url", required=1),
            MultiSelect(name="finalformat", required=0, options=finalformat_options),

@@ -15,7 +15,7 @@ from ricky.imgradient.options import *
 
 class ImGradientParams(Params):
     def __init__(self):
-        self.params = [
+        self._params = [
            Username(name="username", required=0),
            NumberRange(name="width", required=1, options=width_options, min=100, max=800),
            NumberRange(name="height", required=1, options=height_options, min=100, max=800),
