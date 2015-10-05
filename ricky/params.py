@@ -34,7 +34,7 @@ class Params(object):
         sys.stderr.write("param not ready: {}".format(p))
         return 0
     return 1
-  def as_hash(self):
+  def as_dict(self):
     result = {}
     for p in self.params:
       result[p.name] = p.value

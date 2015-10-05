@@ -26,4 +26,4 @@ class Im:
     def call(self, params):
         if not(params.is_ready()):
           raise Exception("Im Params Not Ready")
-        return json.loads(self.post_request(self.url, params.as_hash()))
+        return json.loads(self.post_request(self.url, params.as_dict()))

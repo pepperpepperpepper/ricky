@@ -1,4 +1,4 @@
-from ricky.api import Im
+from ricky.im import Im
 from ricky.imgradient.params import ImGradientParams
 from ricky.config import IMGRADIENT_URL
 

@@ -1,4 +1,4 @@
-from ricky.api import Im
+from ricky.im import Im
 from ricky.imgrid.params import ImGridParams
 from ricky.config import IMGRID_URL
 

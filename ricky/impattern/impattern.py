@@ -1,4 +1,4 @@
-from ricky.api import Im
+from ricky.im import Im
 from ricky.impattern.params import ImPatternParams
 from ricky.config import IMPATTERN_URL
 

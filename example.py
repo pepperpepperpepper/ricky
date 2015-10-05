@@ -6,17 +6,17 @@ from ricky.imbreak import ImBreak
 from ricky.imgradient import ImGradient
 import pprint
 
-#api = ImPattern()
-#params = api.params_init()
-#params.randomize()
-#print params.as_hash()
-#req = params.execute()
-#print req
+api = ImPattern()
+params = api.params_init()
+params.randomize()
+print params.as_dict()
+req = params.execute()
+print req
 
 #api = ImGrid()
 #params = api.params_init()
 #params.randomize()
-#print params.as_hash()
+#print params.as_dict()
 #req = params.execute()
 #print req
 
@@ -25,13 +25,13 @@ import pprint
 #api = ImBreak()
 #params = api.params_init()
 #params.randomize()
-#print params.as_hash()
+#print params.as_dict()
 #req = params.execute()
 #print req
 
-api = ImGradient()
-params = api.params_init()
-params.randomize()
-print params.as_hash()
-req = params.execute()
-print req
+#api = ImGradient()
+#params = api.params_init()
+#params.randomize()
+#print params.as_dict()
+#req = params.execute()
+#print req

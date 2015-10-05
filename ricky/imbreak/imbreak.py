@@ -1,4 +1,4 @@
-from ricky.api import Im
+from ricky.im import Im
 from ricky.imbreak.params import ImBreakParams
 from ricky.config import IMBREAK_URL
 
