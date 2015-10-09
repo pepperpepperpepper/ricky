@@ -19,8 +19,10 @@ class NumberRange(Param):
             if position >= choice:
                 self.value = elem["value"]
                 return
-        self.value = random.randint(self.range_min, self.range_max)
-
+        
+        val = random.randint(self.range_min, self.range_max)
+        self.value = val
+        
     @property
     def value(self):
         return super(NumberRange, self).value_get()
@@ -28,7 +30,8 @@ class NumberRange(Param):
     @value.setter
     def value(self, value):
         self._value = value
-        if self._value < self.range_min or self._value > self.range_max:
+        if self._value and \
+            (self._value < self.range_min or self._value > self.range_max):
             raise ValueError(
                 "Value must be between %s and %s\n" % (
                     self.range_min, self.range_max
