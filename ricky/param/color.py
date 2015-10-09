@@ -1,8 +1,8 @@
-from ricky.param.multiselect import MultiSelect
+from ricky.param import Param
 import random
 
 
-class Color(MultiSelect):
+class Color(Param):
     def __init__(self, **kwargs):
         super(Color, self).__init__(**kwargs)
 
@@ -12,7 +12,7 @@ class Color(MultiSelect):
 
     @property
     def value(self):
-        return super(MultiSelect, self).value_get()
+        return super(Color, self).value_get()
 
     @value.setter
     def value(self, value):

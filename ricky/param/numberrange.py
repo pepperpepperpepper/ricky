@@ -4,7 +4,7 @@ from ricky.param import Param
 
 class NumberRange(Param):
     def __init__(self, **kwargs):
-        super(Param, self).__init__()
+        super(NumberRange, self).__init__(**kwargs)
         self.range_min = kwargs['min']
         self.range_max = kwargs['max']
 
@@ -23,7 +23,7 @@ class NumberRange(Param):
 
     @property
     def value(self):
-        return super(Param, self).value_get()
+        return super(NumberRange, self).value_get()
 
     @value.setter
     def value(self, value):
