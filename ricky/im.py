@@ -4,7 +4,7 @@ import sys
 import simplejson as json
 
 
-class Im:
+class Im(object):
     def __init__(self):
         self._required_keys = []
         self.url = ""

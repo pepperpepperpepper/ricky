@@ -4,9 +4,12 @@ import pprint
 
 
 class Params(object):
-    def __init__(self):
+    def __init__(self, *args):
         self._api = None
-        self._params = []
+        self._params = args
+
+    def define_from_list(self, definitions_list):
+        self._params = definitions_list
 
     def param(self, name):
         """getter for the param by name"""

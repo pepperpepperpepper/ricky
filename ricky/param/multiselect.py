@@ -25,6 +25,10 @@ class MultiSelect(Param):
         return super(MultiSelect, self).value_get()
 
     def value_set(self, value):
+        import sys
+        sys.stderr.write("in value set right now for some reason...\n")
+        sys.stderr.write("%s\n" % self.name)
+        sys.stderr.write("%s\n" % value)
         if not any([value == i['value'] for i in self._options]) and \
             value is not None:
             raise ValueError

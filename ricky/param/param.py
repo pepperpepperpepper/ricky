@@ -26,7 +26,13 @@ class Param(object):
 
     def value_set(self, value):
         self._value = value
-        sys.stderr.write("trying to set %s: %s \n" % (self.name, value))
+        sys.stderr.write("trying to set %s - %s: %s \n" %
+            (
+                self.__class__.__name__,
+                self.name,
+                value
+            )
+        )
         if self._value:
             self.is_ready = 1
         self.set_by_user = 1
