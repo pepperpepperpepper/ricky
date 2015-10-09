@@ -1,19 +1,20 @@
 from ricky.param.options import Options
+
 width_options = Options.from_dict(
-    { "value" : 400, "weight" : 1 }, 
-    { "value" : 600, "weight" : 1 }, 
+    { "value" : 400, "weight" : 1 },
+    { "value" : 600, "weight" : 1 },
 )
 height_options = Options.from_dict(
-    { "value" : 400, "weight" : 1 }, 
-    { "value" : 600, "weight" : 1 }, 
+    { "value" : 400, "weight" : 1 },
+    { "value" : 600, "weight" : 1 },
 )
 color1_options = Options.from_dict(
-    { "value" : "black", "weight" : 1 }, 
-    { "value" : "white", "weight" : 2 }, 
+    { "value" : "black", "weight" : 1 },
+    { "value" : "white", "weight" : 2 },
 )
 color2_options = Options.from_dict(
-    { "value" : "black", "weight" : 2 }, 
-    { "value" : "white", "weight" : 1 }, 
+    { "value" : "black", "weight" : 2 },
+    { "value" : "white", "weight" : 1 },
 )
 stripes_options = Options.from_dict(
     {"value":"true",  "weight": 1},
@@ -40,14 +41,14 @@ halftone_options = Options.from_dict(
     { "value" : "flatstripes", "weight": 1 },
 )
 bevel_options = Options.from_dict(
-    { "value" : "", "weight" : 4 }, 
-    { "value" : "flatout", "weight" : 1 }, 
-    { "value" : "flatinner", "weight" : 1 }, 
-    { "value" : "evenlyframed", "weight" : 1 }, 
-    { "value" : "biginner", "weight" : 1 }, 
-    { "value" : "bigouter", "weight" : 1 }, 
-    { "value" : "dramaticflatout", "weight" : 1 }, 
-    { "value" : "dramaticflatinner", "weight" : 1 }, 
+    { "value" : "", "weight" : 4 },
+    { "value" : "flatout", "weight" : 1 },
+    { "value" : "flatinner", "weight" : 1 },
+    { "value" : "evenlyframed", "weight" : 1 },
+    { "value" : "biginner", "weight" : 1 },
+    { "value" : "bigouter", "weight" : 1 },
+    { "value" : "dramaticflatout", "weight" : 1 },
+    { "value" : "dramaticflatinner", "weight" : 1 },
 )
 
 blurriness_options = \
@@ -72,12 +73,12 @@ filetype_options = Options.from_dict(
     {"value":"gif",  "weight": 2},
 )
 gradienttype_options = Options.from_dict(
-    { "value" : "canvas", "weight" : 1 }, 
-    { "value" : "gradient", "weight" : 3 }, 
-    { "value" : "radial", "weight" : 1 }, 
-    { "value" : "colorspace", "weight" : 1 }, 
-    { "value" : "plasmawash", "weight" : 1 }, 
-    { "value" : "gradientwash", "weight" : 1 }, 
-    { "value" : "mirrored", "weight" : 1 }, 
-    { "value" : "noise", "weight" : 1 }, 
+    { "value" : "canvas", "weight" : 1 },
+    { "value" : "gradient", "weight" : 3 },
+    { "value" : "radial", "weight" : 1 },
+    { "value" : "colorspace", "weight" : 1 },
+    { "value" : "plasmawash", "weight" : 1 },
+    { "value" : "gradientwash", "weight" : 1 },
+    { "value" : "mirrored", "weight" : 1 },
+    { "value" : "noise", "weight" : 1 },
 )

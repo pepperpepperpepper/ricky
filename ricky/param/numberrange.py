@@ -18,7 +18,7 @@ class NumberRange(MultiSelect):
        self.value = random.randint(self.range_min,self.range_max)
     @property
     def value(self):
-      return super(MultiSelect, self).get_value()
+      return super(MultiSelect, self).value_get()
     @value.setter
     def value(self, value):
       self._value = value

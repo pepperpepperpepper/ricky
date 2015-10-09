@@ -1,5 +1,9 @@
+"""ALL GLOBAL CONSTANTS GO HERE"""
 USERNAME = "RICHARD_GIOVANNI"
-TEST_URL = "http://i.asdf.us/im/65/imBreak5qI6DN2_14254-PbPattern_1444004782_pepper.png"
+TEST_URL = (
+    "http://i.asdf.us/im/"
+    "65/imBreak5qI6DN2_14254-PbPattern_1444004782_pepper.png"
+)
 PATTERN_BASE_URL = "http://asdf.us/impattern/patterns"
 IMPATTERN_URL = "http://asdf.us/im/api/impattern"
 IMGRID_URL = "http://asdf.us/im/api/imgrid"

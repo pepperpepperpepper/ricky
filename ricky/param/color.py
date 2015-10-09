@@ -10,7 +10,7 @@ class Color(MultiSelect):
 
     @property
     def value(self):
-      return super(MultiSelect, self).get_value()
+      return super(MultiSelect, self).value_get()
     @value.setter
     def value(self, value):
       self._value = value
