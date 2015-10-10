@@ -4,7 +4,7 @@ from ricky.param.username import Username
 from ricky.param.multiselect import MultiSelect
 from ricky.param.numberrange import NumberRange
 from ricky.param.color import Color
-from ricky.imgradient.options import *
+from ricky.imgradient.selections import *
 
 
 class Params(_Params):
@@ -14,47 +14,47 @@ class Params(_Params):
             NumberRange(
                 name="width",
                 required=1,
-                options=width_options,
+                selections=width_selections,
                 min=10,
                 max=800
             ),
             NumberRange(
                 name="height",
                 required=1,
-                options=height_options,
+                selections=height_selections,
                 min=10,
                 max=800
             ),
-            Color(name="color1", required=1, options=color1_options),
-            Color(name="color2", required=1, options=color2_options),
+            Color(name="color1", required=1, selections=color1_selections),
+            Color(name="color2", required=1, selections=color2_selections),
             MultiSelect(
                 name="filetype",
                 required=0,
-                options=filetype_options
+                selections=filetype_selections
             ),
             MultiSelect(
                 name="gradienttype",
                 required=1,
-                options=gradienttype_options
+                selections=gradienttype_selections
             ),
             MultiSelect(
                 name="halftone",
                 required=0,
-                options=halftone_options
+                selections=halftone_selections
             ),
-            MultiSelect(name="bevel", required=0, options=bevel_options),
+            MultiSelect(name="bevel", required=0, selections=bevel_selections),
 
             NumberRange(
                 name="stripenumber",
                 required=0,
-                options=stripenumber_options,
+                selections=stripenumber_selections,
                 min=0,
                 max=400
             ),
             NumberRange(
                 name="stripeintensity",
                 required=0,
-                options=stripeintensity_options,
+                selections=stripeintensity_selections,
                 min=0,
                 max=5000
             ),
@@ -62,59 +62,59 @@ class Params(_Params):
             NumberRange(
                 name="blurriness",
                 required=0,
-                options=blurriness_options,
+                selections=blurriness_selections,
                 min=0,
                 max=200
             ),
   #          NumberRange(
   #              name="contrast",
   #              required=0,
-  #              options=contrast_options,
+  #              selections=contrast_selections,
   #              min=0,
   #              max=200
   #          ),
             NumberRange(
                 name="brightness",
                 required=0,
-                options=brightness_options,
+                selections=brightness_selections,
                 min=0,
                 max=200
             ),
             NumberRange(
                 name="saturation",
                 required=0,
-                options=saturation_options,
+                selections=saturation_selections,
                 min=0,
                 max=200
             ),
             NumberRange(
                 name="hue",
                 required=0,
-                options=hue_options,
+                selections=hue_selections,
                 min=0,
                 max=200
             ),
             NumberRange(
                 name="percentbeveled",
                 required=0,
-                options=percentbeveled_options,
+                selections=percentbeveled_selections,
                 min=0,
                 max=100
             ),
             NumberRange(
                 name="rotate",
                 required=0,
-                options=rotate_options,
+                selections=rotate_selections,
                 min=0,
                 max=360
             ),
             NumberRange(
                 name="tilt",
                 required=0,
-                options=tilt_options,
+                selections=tilt_selections,
                 min=0,
                 max=360
             ),
-            MultiSelect(name="flop", required=0, options=flop_options),
-            MultiSelect(name="flip", required=0, options=flip_options),
+            MultiSelect(name="flop", required=0, selections=flop_selections),
+            MultiSelect(name="flip", required=0, selections=flip_selections),
         )

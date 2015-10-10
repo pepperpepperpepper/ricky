@@ -10,7 +10,7 @@ class MultiSelect(Param):
         return super(MultiSelect, self).value_get()
 
     def value_set(self, value):
-        if not any([value == i['value'] for i in self._options]) and \
+        if not any([value == i['value'] for i in self._selections]) and \
             value is not None:
             raise ValueError
         super(MultiSelect, self).value_set(value)
@@ -18,10 +18,10 @@ class MultiSelect(Param):
     value = property(value_get, value_set)
 
     def randomize(self):
-        weights_total = sum(map(lambda x: x["weight"], self.options()))
+        weights_total = sum(map(lambda x: x["weight"], self.selections()))
         choice = random.randint(0, weights_total)
         position = 0
-        for elem in self.options():
+        for elem in self.selections():
             position += elem["weight"]
             if position >= choice:
                 self.value = elem["value"]

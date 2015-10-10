@@ -1,6 +1,6 @@
-from ricky.param.option import Option
+from ricky.param.option import Selection
 import sys
-class Options:
+class Selections:
   def __init__(self, *args):
     self._values = args
   def __iter__(self):
@@ -17,5 +17,5 @@ class Options:
         return i
   @classmethod
   def from_dict(cls, *args):
-    options = map(lambda x: Option(**x), args);
-    return cls(*options);
+    selections = map(lambda x: Selection(**x), args);
+    return cls(*selections);

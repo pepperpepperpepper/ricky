@@ -1,6 +1,6 @@
-class Option(dict):
+class Selection(dict):
   def __init__(self, **kwargs):
-    super(Option, self).__init__(**kwargs)
+    super(Selection, self).__init__(**kwargs)
     self.value = kwargs["value"]
     self.weight = kwargs["weight"]
   def __getattr__(self, attr):

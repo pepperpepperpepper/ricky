@@ -15,19 +15,19 @@ class Param(object):
         self.is_ready = 0
         self._value = value
         self.set_by_user = set_by_user
-        self._options = kwargs.get('options') or []
-        if len(self._options):
-            self._validate_options()
+        self._selections = kwargs.get('selections') or []
+        if len(self._selections):
+            self._validate_selections()
             """default value is the option with the heaviest weight"""
             self.default(self._choose_heaviest())
 
-    def options(self):
-        return self._options
+    def selections(self):
+        return self._selections
 
-    def _validate_options(self):
+    def _validate_selections(self):
         try:
-            int(self._options[0]['weight'])
-            self._options[0]['value']
+            int(self._selections[0]['weight'])
+            self._selections[0]['value']
         except Exception:
             raise ValueError('Unable to validate %s\n:' % self.name)
 
@@ -72,13 +72,13 @@ class Param(object):
         heaviest_idx = 0
         heaviest_weight = 0
         idx = 0
-        if (len(self.options())):
-            for elem in self.options():
+        if (len(self.selections())):
+            for elem in self.selections():
                 if elem["weight"] > heaviest_weight:
                     heaviest_weight = elem["weight"]
                     heaviest_idx = idx
                 idx += 1
-            return self.options()[heaviest_idx]["value"]
+            return self.selections()[heaviest_idx]["value"]
         else:
             self.randomize()
 

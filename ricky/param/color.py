@@ -23,11 +23,11 @@ class Color(Param):
 
     def randomize(self):
         weights_total = sum(
-            map(lambda x: x["weight"], self.options())
+            map(lambda x: x["weight"], self.selections())
         ) + (255 * 255 * 255)
         choice = random.randint(0, weights_total)
         position = 0
-        for elem in self.options():
+        for elem in self.selections():
             position += elem["weight"]
             if position >= choice:
                 self.value = elem["value"]

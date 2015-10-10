@@ -10,18 +10,18 @@ class NumberRange(Param):
 
     def randomize(self):
         weights_total = sum(
-                map(lambda x: x["weight"], self.options())
+                map(lambda x: x["weight"], self.selections())
             )# + self.range_max - self.range_min
         if weights_total < 100:
             weights_total = 100;
         choice = random.randint(0, weights_total)
         import sys
-        sys.stderr.write("choosing %s: random_int: %s, options: %s\n" % (
+        sys.stderr.write("choosing %s: random_int: %s, selections: %s\n" % (
             self.name,
             choice,
-            self.options()))
+            self.selections()))
         position = 0
-        for elem in self.options():
+        for elem in self.selections():
             position += elem["weight"]
             if position >= choice:
                 self.value = elem["value"]
