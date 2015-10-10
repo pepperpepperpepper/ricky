@@ -15,14 +15,14 @@ class Params(_Params):
                 name="width",
                 required=1,
                 options=width_options,
-                min=100,
+                min=10,
                 max=800
             ),
             NumberRange(
                 name="height",
                 required=1,
-                options=width_options,
-                min=100,
+                options=height_options,
+                min=10,
                 max=800
             ),
             Color(name="color1", required=1, options=color1_options),

@@ -1,12 +1,13 @@
 from ricky.param.options import Options
 
 width_options = Options.from_dict(
-    {"value": 400, "weight": 3},
-    {"value": 600, "weight": 1},
+    {"value": 40, "weight": 60},
+    {"value": 20, "weight": 60},
+    {"value": 60, "weight": 60},
+    {"value": 80, "weight": 60},
 )
 height_options = Options.from_dict(
-    {"value": 400, "weight": 3},
-    {"value": 600, "weight": 1},
+    {"value": 400, "weight": 900},
 )
 color1_options = Options.from_dict(
     {"value": "", "weight": 0},
@@ -23,15 +24,22 @@ stripes_options = Options.from_dict(
     {"value": "false", "weight": 1},
 )
 stripenumber_options = Options.from_dict(
-    {"value": "", "weight": 0},
+    {"value": 3, "weight": 10},
+    {"value": 10, "weight": 10},
+    {"value": 20, "weight": 10},
+    {"value": 100, "weight": 10},
+    {"value": 40, "weight": 10},
 #    {"value": 1, "weight": 50},
 #    {"value": 2, "weight": 50},
 #    {"value": 2, "weight": 50},
 
 )
+stripeintensity_options = Options.from_dict(
+  {"value": 1000, "weight": 10},
+  {"value": 4, "weight": 10},
+) 
 #  contrast_options = \
-stripeintensity_options = \
-  brightness_options = \
+brightness_options = \
   saturation_options = \
   hue_options = \
   Options.from_dict(
@@ -39,18 +47,18 @@ stripeintensity_options = \
 #    {"value": "", "weight": 300},
 )
 halftone_options = Options.from_dict(
-    {"value": "", "weight": 20},
-    {"value": "checkeredfade", "weight": 1},
-    {"value": "etchedtransition", "weight": 1},
-    {"value": "bendaydots", "weight": 1},
-    {"value": "smallerdots1", "weight": 1},
-    {"value": "smallerdots2", "weight": 1},
-    {"value": "flatstripes", "weight": 1},
+    {"value": "", "weight": 60},
+    {"value": "checkeredfade", "weight": 10},
+    {"value": "etchedtransition", "weight": 10},
+    {"value": "bendaydots", "weight": 10},
+    {"value": "smallerdots1", "weight": 10},
+    {"value": "smallerdots2", "weight": 10},
+    {"value": "flatstripes", "weight": 10},
 )
 bevel_options = Options.from_dict(
     {"value": "", "weight": 4},
     {"value": "flatout", "weight": 1},
-    {"value": "flatinner", "weight": 1},
+    {"value": "flatinner", "weight": 0},
     {"value": "evenlyframed", "weight": 1},
 #    {"value": "biginner", "weight": 1},
     {"value": "bigouter", "weight": 1},
@@ -62,7 +70,7 @@ blurriness_options = \
     percentbeveled_options = Options.from_dict(
     {"value": 30, "weight": 20},
     {"value": 10, "weight": 2},
-    {"value": "", "weight": 100},
+    {"value": "", "weight": 1},
 )
 rotate_options = \
     tilt_options = Options.from_dict(
@@ -88,6 +96,6 @@ gradienttype_options = Options.from_dict(
     {"value": "colorspace", "weight": 1},
     {"value": "plasmawash", "weight": 2},
     {"value": "gradientwash", "weight": 1},
-    {"value": "mirrored", "weight": 1},
-    {"value": "noise", "weight": 3},
+    {"value": "mirrored", "weight": 0},
+    {"value": "noise", "weight": 1},
 )

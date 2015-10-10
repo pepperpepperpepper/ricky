@@ -11,8 +11,15 @@ class NumberRange(Param):
     def randomize(self):
         weights_total = sum(
                 map(lambda x: x["weight"], self.options())
-            ) + self.range_max - self.range_min
+            )# + self.range_max - self.range_min
+        if weights_total < 100:
+            weights_total = 100;
         choice = random.randint(0, weights_total)
+        import sys
+        sys.stderr.write("choosing %s: random_int: %s, options: %s\n" % (
+            self.name,
+            choice,
+            self.options()))
         position = 0
         for elem in self.options():
             position += elem["weight"]
@@ -30,6 +37,16 @@ class NumberRange(Param):
     @value.setter
     def value(self, value):
         self._value = value
+        import sys
+        sys.stderr.write("%s \n" % self.name)
+        sys.stderr.write("%s \n" % self._value)
+        if self._value < self.range_min:
+            sys.stderr.write("PROBLEM HERE1") 
+        if self._value > self.range_max:
+            sys.stderr.write("%s > %s\n" % (self._value, self.range_max))
+            sys.stderr.write("%s\n" % type(self._value))
+            sys.stderr.write("%s\n" % type(self.range_max))
+            sys.stderr.write("PROBLEM HERE2") 
         if self._value and \
             (self._value < self.range_min or self._value > self.range_max):
             raise ValueError(
