@@ -1,6 +1,6 @@
 import re, random
 from ricky.params import Params
-from ricky.param.option import Selection
+from ricky.param.selection import Selection
 from ricky.param.selections import Selections
 from ricky.param.username import Username
 from ricky.param.imageurl import ImageUrl

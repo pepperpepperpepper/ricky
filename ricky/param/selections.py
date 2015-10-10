@@ -1,4 +1,4 @@
-from ricky.param.option import Selection
+from ricky.param.selection import Selection
 import sys
 class Selections:
   def __init__(self, *args):

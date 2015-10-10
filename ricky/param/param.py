@@ -18,7 +18,7 @@ class Param(object):
         self._selections = kwargs.get('selections') or []
         if len(self._selections):
             self._validate_selections()
-            """default value is the option with the heaviest weight"""
+            """default value is the selection with the heaviest weight"""
             self.default(self._choose_heaviest())
 
     def selections(self):
