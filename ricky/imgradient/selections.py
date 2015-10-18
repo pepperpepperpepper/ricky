@@ -37,7 +37,7 @@ stripenumber_selections = Selections.from_dict(
 stripeintensity_selections = Selections.from_dict(
   {"value": 1000, "weight": 10},
   {"value": 4, "weight": 10},
-) 
+)
 #  contrast_selections = \
 brightness_selections = \
   saturation_selections = \
@@ -68,8 +68,12 @@ bevel_selections = Selections.from_dict(
 
 blurriness_selections = \
     percentbeveled_selections = Selections.from_dict(
-    {"value": 30, "weight": 20},
-    {"value": 10, "weight": 2},
+    {"value": 30, "weight": 10},
+    {"value": 10, "weight": 10},
+    {"value": 5, "weight": 10},
+    {"value": 20, "weight": 10},
+    {"value": 25, "weight": 10},
+    {"value": 7, "weight": 10},
     {"value": "", "weight": 1},
 )
 rotate_selections = \
