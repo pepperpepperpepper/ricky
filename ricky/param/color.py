@@ -17,21 +17,8 @@ class Color(Param):
     @value.setter
     def value(self, value):
         self._value = value
-        if self._value is not None:
-            self.is_ready = 1
-        self.set_by_user = 1
 
     def randomize(self):
-        weights_total = sum(
-            map(lambda x: x["weight"], self.selections())
-        ) + (255 * 255 * 255)
-        choice = random.randint(0, weights_total)
-        position = 0
-        for elem in self.selections():
-            position += elem["weight"]
-            if position >= choice:
-                self.value = elem["value"]
-                return
         self.value = "rgb(%s,%s,%s)" % (
             random.randint(0, 255),
             random.randint(0, 255),
