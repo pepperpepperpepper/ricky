@@ -20,7 +20,9 @@ class Params(object):
 
     def __str__(self):
         """string representation"""
-        return pprint.pformat({"params": map(lambda x: vars(x), self._params)})
+        return pprint.pformat(
+            {"params": map(lambda x: vars(x), self._params)}
+        )
 
     def randomize(self):
         """assign random values to all params, taking into account weight"""
@@ -28,7 +30,6 @@ class Params(object):
             if param.set_by_user:
                 continue
             param.randomize()
-
 
     @property
     def api(self):
