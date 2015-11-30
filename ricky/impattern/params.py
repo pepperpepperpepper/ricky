@@ -20,9 +20,9 @@ class Pattern_UrlProbability(Probability):
 class ImPatternParams(Params):
     def __init__(self):
         self._params = [
-           Username(name="username", required=0),
-           ImageUrl(name="image_url", required=1),
-           MultiSelect(name="pattern_url", required=1, probabilities=pattern_url_probabilities)
+           Username(name="username", required=False),
+           ImageUrl(name="image_url", required=True),
+           MultiSelect(name="pattern_url", required=True, probabilities=pattern_url_probabilities)
         ]
 
 pattern_url_probabilities = Probabilities(*[

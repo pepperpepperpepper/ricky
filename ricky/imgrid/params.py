@@ -91,10 +91,10 @@ class Param_Opacity(ConstrainedNumber):
 class ImGridParams(Params):
     def __init__(self):
         self._params = [
-           Username(name="username", required=0),
-           ImageUrl(name="bgimage", required=0),
-           ImageUrl(name="imageinstead", required=0),
-           ImageUrl(name="planebgimage", required=0),
+           Username(name="username", required=False),
+           ImageUrl(name="bgimage", required=False),
+           ImageUrl(name="imageinstead", required=False),
+           ImageUrl(name="planebgimage", required=False),
            MultiSelect(
                name="format",
                required=False,
@@ -102,7 +102,7 @@ class ImGridParams(Params):
            ),
            MultiSelect(
                name="transition",
-               required=1,
+               required=True,
                options=_TRANSITION_OPTIONS
            ),
            Color(name="skycolor", required=False),

@@ -5,16 +5,21 @@ class Param(object):
     def __init__(
                  self,
                  required=False,
-                 set_by_user=0,
-                 value=None,
+                 set_by_user=False,
                  name=None,
                  **kwargs
                 ):
         self._value_default = None
         self.name = name
         self.required = required
-        self._value = value
-        self.set_by_user = set_by_user
+
+        if self.value is not None and \
+                kwargs.get("value") is not None:
+            self._value = kwargs.get("value")
+        else:
+            self._value = None
+        if not hasattr(self, "set_by_user"):
+            self.set_by_user = set_by_user
 
     def __str__(self):
         return pprint.pformat(vars(self))
@@ -31,7 +36,6 @@ class Param(object):
 
     def default(self, value):
         self._value_default = value
-
 
     def randomize(self):
         pass

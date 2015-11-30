@@ -3,19 +3,21 @@ from ricky.param import Param
 DEFAULT_RAND_MAX = 1000
 DEFAULT_RAND_MIN = -1000
 
+
 class ConstrainedNumber(Param):
     def __init__(self, **kwargs):
-        super(ConstrainedNumber, self).__init__(**kwargs)
         self.range_min = kwargs.get('min')
         self.range_max = kwargs.get('max')
         self.forbidden = kwargs.get('forbidden')
         self.forbidden_range_min = kwargs.get('forbidden_range_min')
         self.forbidden_range_max = kwargs.get('forbidden_range_max')
         self.assert_int = kwargs.get('assert_int')
-
-    def randomize(self):
-        val = random.randint(self.range_min, self.range_max)
-        self.value = val
+        if kwargs.get("default") is not None:
+            self._default = kwargs.get("default")
+        else:
+            self.randomize()
+            self._default = self._value
+        super(ConstrainedNumber, self).__init__(**kwargs)
 
     @property
     def value(self):
@@ -24,9 +26,9 @@ class ConstrainedNumber(Param):
     @value.setter
     def value(self, value):
         if value is not None and (
-                            self._value < self.range_min or
-                            self._value > self.range_max
-                           ):
+            self._value < self.range_min or
+            self._value > self.range_max
+        ):
             raise ValueError(
                 "Value must be between %s and %s\n" % (
                     self.range_min, self.range_max
@@ -60,7 +62,7 @@ class ConstrainedNumber(Param):
         }
         for attr in (
             'range_min', 'range_max', 'forbidden', 'forbidden_range_min',
-            'forbidden_range_max', 'enforce_int'
+            'forbidden_range_max', 'assert_int'
         ):
             attr_val = getattr(self, attr)
             if attr_val or attr_val == 0:
@@ -70,19 +72,19 @@ class ConstrainedNumber(Param):
     def _generate_random(self):
         value = random.uniform(DEFAULT_RAND_MIN, DEFAULT_RAND_MAX)
         if self.assert_int:
-           value = int(value)
+            value = int(value)
         self.value = value
 
     def randomize(self):
         tries = 0
         tries_max = 30
         try:
-           self._generate_random()
+            self._generate_random()
         except ValueError:
-           tries += 1
-           if tries < tries_max:
-               self._generate_random()
-           else:
-               raise ValueError(
-                   "Unable to set random value on %s in %s tries"
-               ) % (self.name, self.tries_max)
+            tries += 1
+            if tries < tries_max:
+                self._generate_random()
+            else:
+                raise ValueError(
+                    "Unable to set random value on %s in %s tries"
+                ) % (self.name, self.tries_max)

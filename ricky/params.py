@@ -1,5 +1,4 @@
 """base class for all params"""
-import sys
 import pprint
 
 
@@ -8,27 +7,25 @@ class Params(object):
         self._api = None
         self._params = args
 
-    def define_from_list(self, definitions_list):
-        self._params = definitions_list
-
     def param(self, name):
         """getter for the param by name"""
         for param in self._params:
             if param.name == name:
                 return param
-        return None
+        raise ValueError("No param with name %s\n" % name)
 
     def __str__(self):
         """string representation"""
+        to_rep = []
+        for param in self._params:
+            to_rep.append({param.name: param.value})
         return pprint.pformat(
-            {"params": map(lambda x: vars(x), self._params)}
+            to_rep
         )
 
     def randomize(self):
         """assign random values to all params, taking into account weight"""
         for param in self._params:
-            if param.set_by_user:
-                continue
             param.randomize()
 
     @property
@@ -45,23 +42,12 @@ class Params(object):
         """calls the associated api"""
         return self.api.call(self)
 
-    def is_ready(self):
-        """test to see if any params with required values are missing"""
-        for param in self._params:
-            if not param.is_ready and not param.default:
-                sys.stderr.write("param not ready: %s\n" % param)
-                return 0
-        return 1
-
-    def __dict__(self):
+    def as_dict(self):
+        """displays the params names and values in dictionary form"""
         result = {}
         for param in self._params:
             result[param.name] = param.value
         return result
-
-    def as_dict(self):
-        """alias for __dict__"""
-        return self.__dict__()
 
     def from_dict(self, params_dict):
         """set param values manually from a dictionary"""

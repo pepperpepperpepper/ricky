@@ -34,24 +34,24 @@ finalformat_options = [
 class ImBreakParams(Params):
     def __init__(self):
         self._params = [
-           Username(name="username", required=0),
-           ImageUrl(name="url", required=1),
+           Username(name="username", required=False),
+           ImageUrl(name="url", required=True),
            MultiSelect(
                        name="finalformat",
-                       required=0,
+                       required=False,
                        options=finalformat_options),
            MultiSelect(
                        name="breaktype",
-                       required=1,
+                       required=True,
                        options=breaktype_options),
            ConstrainedNumber(
                        name="breakangle",
-                       required=0,
+                       required=False,
                        min=-180,
                        max=180),
            MultiSelect(
                        name="breakmode",
-                       required=1,
+                       required=True,
                        options=breakmode_options),
-           Bool(name="expanded", required=0)
+           Bool(name="expanded", required=False)
         ]

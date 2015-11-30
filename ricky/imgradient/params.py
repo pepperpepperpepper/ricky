@@ -48,107 +48,106 @@ _GRADIENTTYPE_OPTIONS = [
 class Params(_Params):
     def __init__(self):
         super(Params, self).__init__(
-            Username(name="username", required=0),
+            Username(name="username", required=False),
             ConstrainedNumber(
                 name="width",
-                required=1,
+                required=True,
                 min=10,
                 max=800
             ),
             ConstrainedNumber(
                 name="height",
-                required=1,
+                required=True,
                 min=10,
                 max=800
             ),
-            Color(name="color1", required=1),
-            Color(name="color2", required=1),
+            Color(name="color1", required=True),
+            Color(name="color2", required=True),
             MultiSelect(
                 name="filetype",
-                required=0,
+                required=False,
             ),
             MultiSelect(
                 name="gradienttype",
-                required=1,
+                required=True,
                 options=_GRADIENTTYPE_OPTIONS
             ),
             MultiSelect(
                 name="halftone",
-                required=0,
+                required=False,
                 options=_HALFTONE_OPTIONS
             ),
             MultiSelect(
                 name="bevel",
-                required=0,
+                required=False,
                 options=_BEVEL_OPTIONS
             ),
             ConstrainedNumber(
                 name="stripenumber",
-                required=0,
+                required=False,
                 min=0,
                 max=400
             ),
             ConstrainedNumber(
                 name="stripeintensity",
-                required=0,
+                required=False,
                 min=0,
                 max=5000
             ),
-
             ConstrainedNumber(
                 name="blurriness",
-                required=0,
+                required=False,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="contrast",
-                required=0,
+                required=False,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="brightness",
-                required=0,
+                required=False,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="saturation",
-                required=0,
+                required=False,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="hue",
-                required=0,
+                required=False,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="percentbeveled",
-                required=0,
+                required=False,
                 min=0,
                 max=100
             ),
             ConstrainedNumber(
                 name="rotate",
-                required=0,
+                required=False,
                 min=0,
                 max=360
             ),
             ConstrainedNumber(
                 name="tilt",
-                required=0,
+                required=False,
                 min=0,
                 max=360
             ),
             Bool(
                 name="flop",
-                required=0,
+                required=False,
             ),
             Bool(
                 name="flip",
-                required=0
-            ),
+                required=False
+            )
         )
