@@ -1,12 +1,12 @@
 from ricky.params import Params
 from ricky.param.username import Username
 from ricky.param.imageurl import ImageUrl
-from ricky.param.multiselect import MultiSelect
+from ricky.param.enum import Enum
 from ricky.param.constrainednumber import ConstrainedNumber
 from ricky.param.bool import Bool
 
 
-breaktype_options = [
+_BREAKTYPE_OPTIONS = [
     "CLASSIC",
     "REDUX",
     "BLURRY_BREAK",
@@ -20,11 +20,11 @@ breaktype_options = [
     "STRIPES",
     "PHOTOCOPY"
 ]
-breakmode_options = [
+_BREAKMODE_OPTIONS = [
     "extreme",
     "subtle",
 ]
-finalformat_options = [
+_FINALFORMAT_OPTIONS = [
     "png",
     "jpg",
     "gif",
@@ -33,25 +33,25 @@ finalformat_options = [
 
 class ImBreakParams(Params):
     def __init__(self):
-        self._params = [
+        self._params = (
            Username(name="username", required=False),
            ImageUrl(name="url", required=True),
-           MultiSelect(
+           Enum(
                        name="finalformat",
                        required=False,
-                       options=finalformat_options),
-           MultiSelect(
+                       options=_FINALFORMAT_OPTIONS),
+           Enum(
                        name="breaktype",
                        required=True,
-                       options=breaktype_options),
+                       options=_BREAKTYPE_OPTIONS),
            ConstrainedNumber(
                        name="breakangle",
                        required=False,
                        min=-180,
                        max=180),
-           MultiSelect(
+           Enum(
                        name="breakmode",
                        required=True,
-                       options=breakmode_options),
+                       options=_BREAKMODE_OPTIONS),
            Bool(name="expanded", required=False)
-        ]
+        )

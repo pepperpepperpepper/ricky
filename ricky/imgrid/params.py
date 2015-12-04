@@ -2,7 +2,7 @@ import random
 from ricky.params import Params
 from ricky.param.username import Username
 from ricky.param.imageurl import ImageUrl
-from ricky.param.multiselect import MultiSelect
+from ricky.param.enum import Enum
 from ricky.param.constrainednumber import ConstrainedNumber
 from ricky.param.color import Color
 from ricky.param.bool import Bool
@@ -56,7 +56,7 @@ class Param_Zoom(ConstrainedNumber):
 
     @property
     def value(self):
-        return super(MultiSelect, self).value_get()
+        return super(Enum, self).value_get()
 
     @value.setter
     def value(self, value):
@@ -90,17 +90,17 @@ class Param_Opacity(ConstrainedNumber):
 
 class ImGridParams(Params):
     def __init__(self):
-        self._params = [
+        self._params = (
            Username(name="username", required=False),
            ImageUrl(name="bgimage", required=False),
            ImageUrl(name="imageinstead", required=False),
            ImageUrl(name="planebgimage", required=False),
-           MultiSelect(
+           Enum(
                name="format",
                required=False,
                options=_FILETYPE_OPTIONS
            ),
-           MultiSelect(
+           Enum(
                name="transition",
                required=True,
                options=_TRANSITION_OPTIONS
@@ -133,7 +133,7 @@ class ImGridParams(Params):
                max=12,
                exclusion_range=[-1.1, 1.1]
            )
-        ]
+        )
 
     def test_values(self):
         return not any([

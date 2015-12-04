@@ -1,12 +1,12 @@
 from ricky.params import Params as _Params
 from ricky.param.username import Username
-from ricky.param.multiselect import MultiSelect
+from ricky.param.enum import Enum
 from ricky.param.constrainednumber import ConstrainedNumber
 from ricky.param.bool import Bool
 from ricky.param.color import Color
 
 
-_HALFTONE_OPTIONS = [
+_HALFTONE_OPTIONS = (
     "",
     "checkeredfade",
     "etchedtransition",
@@ -14,9 +14,9 @@ _HALFTONE_OPTIONS = [
     "smallerdots1",
     "smallerdots2",
     "flatstripes",
-]
+)
 
-_BEVEL_OPTIONS = [
+_BEVEL_OPTIONS = (
     "",
     "flatout",
     "flatinner",
@@ -25,15 +25,15 @@ _BEVEL_OPTIONS = [
     "bigouter",
     "dramaticflatout",
     "dramaticflatinner",
-]
+)
 
-_FILETYPE_OPTIONS = [
+_FILETYPE_OPTIONS = (
     "png",
     "jpg",
     "gif",
-]
+)
 
-_GRADIENTTYPE_OPTIONS = [
+_GRADIENTTYPE_OPTIONS = (
     "canvas",
     "gradient",
     "radial",
@@ -42,7 +42,7 @@ _GRADIENTTYPE_OPTIONS = [
     "gradientwash",
     "mirrored",
     "noise",
-]
+)
 
 
 class Params(_Params):
@@ -63,21 +63,21 @@ class Params(_Params):
             ),
             Color(name="color1", required=True),
             Color(name="color2", required=True),
-            MultiSelect(
+            Enum(
                 name="filetype",
                 required=False,
             ),
-            MultiSelect(
+            Enum(
                 name="gradienttype",
                 required=True,
                 options=_GRADIENTTYPE_OPTIONS
             ),
-            MultiSelect(
+            Enum(
                 name="halftone",
                 required=False,
                 options=_HALFTONE_OPTIONS
             ),
-            MultiSelect(
+            Enum(
                 name="bevel",
                 required=False,
                 options=_BEVEL_OPTIONS

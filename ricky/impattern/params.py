@@ -1,33 +1,24 @@
-import re
-from ricky.params import Params
-from ricky.param import Param
-from ricky.param.probability import Probability
-from ricky.param.probabilities import Probabilities
+from ricky.params import Params as _Params
 from ricky.param.username import Username
 from ricky.param.imageurl import ImageUrl
-from ricky.param.multiselect import MultiSelect
+from ricky.param.enum import Enum
+from ricky.config import PATTERN_URL_BASE
 
-from ricky.config import PATTERN_BASE_URL
 
-class Pattern_UrlProbability(Probability):
-  def __init__(self, **kwargs):
-    super(Pattern_UrlProbability, self).__init__(**kwargs)
-  @classmethod
-  def from_name(cls, **kwargs):
-    formatted = "{}/{}.png".format(PATTERN_BASE_URL, kwargs["value"])
-    return cls(weight=kwargs["weight"], value=formatted )
-
-class ImPatternParams(Params):
+class Params(_Params):
     def __init__(self):
-        self._params = [
+        self._params = (
            Username(name="username", required=False),
            ImageUrl(name="image_url", required=True),
-           MultiSelect(name="pattern_url", required=True, probabilities=pattern_url_probabilities)
-        ]
+           Enum(
+                name="pattern_url",
+                required=True,
+                options=self._get_pattern_urls()
+           )
+        )
 
-pattern_url_probabilities = Probabilities(*[
-  Pattern_UrlProbability.from_name(weight=0, value=i) for i in range(1,100) ] + [
-  Pattern_UrlProbability.from_name(weight=0, value="a{}".format(i)) for i in range(0, 42)
-])
-
-pattern_url_probabilities.search("a10").weight = 20;
+    def _get_pattern_urls(self):
+        return set(
+            ["%s/img/%s.png" % (PATTERN_URL_BASE, i) for i in xrange(0, 97)] +
+            ["%s/img/a%s.png" % (PATTERN_URL_BASE, i) for i in xrange(1, 42)]
+        )
