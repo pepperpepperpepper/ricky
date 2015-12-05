@@ -16,11 +16,8 @@ class Params(object):
 
     def __str__(self):
         """string representation"""
-        to_rep = []
-        for param in self._params:
-            to_rep.append({param.name: param.value})
         return pprint.pformat(
-            to_rep
+            [{param.name: param._value} for param in self._params]
         )
 
     def randomize(self):

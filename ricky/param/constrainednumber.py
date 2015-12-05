@@ -6,17 +6,15 @@ DEFAULT_RAND_MIN = -1000
 
 class ConstrainedNumber(Param):
     def __init__(self, **kwargs):
-        self.range_min = kwargs.get('min')
-        self.range_max = kwargs.get('max')
+        self.range_min = kwargs.get('min', DEFAULT_RAND_MIN)
+        self.range_max = kwargs.get('max', DEFAULT_RAND_MAX)
         self.forbidden = kwargs.get('forbidden')
         self.forbidden_range_min = kwargs.get('forbidden_range_min')
         self.forbidden_range_max = kwargs.get('forbidden_range_max')
-        self.assert_int = kwargs.get('assert_int')
-        if kwargs.get("default") is not None:
-            self._default = kwargs.get("default")
-        else:
+        self.enforce_int = kwargs.get('enforce_int')
+        if "default" not in kwargs:
             self.randomize()
-            self._default = self._value
+            kwargs["default"] = self._value
         super(ConstrainedNumber, self).__init__(**kwargs)
 
     @property
@@ -26,8 +24,8 @@ class ConstrainedNumber(Param):
     @value.setter
     def value(self, value):
         if value is not None and (
-            self._value < self.range_min or
-            self._value > self.range_max
+            value < self.range_min or
+            value > self.range_max
         ):
             raise ValueError(
                 "Value must be between %s and %s\n" % (
@@ -50,7 +48,7 @@ class ConstrainedNumber(Param):
                     "In forbidden range: Value %s is above %s" %
                     (value, self.forbidden_range_min)
                 )
-        if self.assert_int and type(value) != int:
+        if self.enforce_int and type(value) != int:
             raise ValueError(
                "Value %s is not an int" % value
             )
@@ -62,7 +60,7 @@ class ConstrainedNumber(Param):
         }
         for attr in (
             'range_min', 'range_max', 'forbidden', 'forbidden_range_min',
-            'forbidden_range_max', 'assert_int'
+            'forbidden_range_max', 'enforce_int'
         ):
             attr_val = getattr(self, attr)
             if attr_val or attr_val == 0:
@@ -70,8 +68,8 @@ class ConstrainedNumber(Param):
         return "Constrained Number Range \"%s\":\n %s" % (self.name, value_dict)
 
     def _generate_random(self):
-        value = random.uniform(DEFAULT_RAND_MIN, DEFAULT_RAND_MAX)
-        if self.assert_int:
+        value = random.uniform(self.range_min, self.range_max)
+        if self.enforce_int:
             value = int(value)
         self.value = value
 

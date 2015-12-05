@@ -6,7 +6,7 @@ from ricky.param.bool import Bool
 from ricky.param.color import Color
 
 
-_HALFTONE_OPTIONS = (
+_HALFTONE_OPTIONS = [
     "",
     "checkeredfade",
     "etchedtransition",
@@ -14,9 +14,9 @@ _HALFTONE_OPTIONS = (
     "smallerdots1",
     "smallerdots2",
     "flatstripes",
-)
+]
 
-_BEVEL_OPTIONS = (
+_BEVEL_OPTIONS = [
     "",
     "flatout",
     "flatinner",
@@ -25,15 +25,15 @@ _BEVEL_OPTIONS = (
     "bigouter",
     "dramaticflatout",
     "dramaticflatinner",
-)
+]
 
-_FILETYPE_OPTIONS = (
+_FILETYPE_OPTIONS = [
     "png",
     "jpg",
     "gif",
-)
+]
 
-_GRADIENTTYPE_OPTIONS = (
+_GRADIENTTYPE_OPTIONS = [
     "canvas",
     "gradient",
     "radial",
@@ -42,7 +42,7 @@ _GRADIENTTYPE_OPTIONS = (
     "gradientwash",
     "mirrored",
     "noise",
-)
+]
 
 
 class Params(_Params):
@@ -52,12 +52,14 @@ class Params(_Params):
             ConstrainedNumber(
                 name="width",
                 required=True,
+                enforce_int=True,
                 min=10,
                 max=800
             ),
             ConstrainedNumber(
                 name="height",
                 required=True,
+                enforce_int=True,
                 min=10,
                 max=800
             ),
@@ -66,6 +68,7 @@ class Params(_Params):
             Enum(
                 name="filetype",
                 required=False,
+                options=_FILETYPE_OPTIONS
             ),
             Enum(
                 name="gradienttype",
@@ -85,60 +88,70 @@ class Params(_Params):
             ConstrainedNumber(
                 name="stripenumber",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=400
             ),
             ConstrainedNumber(
                 name="stripeintensity",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=5000
             ),
             ConstrainedNumber(
                 name="blurriness",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="contrast",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="brightness",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="saturation",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="hue",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=200
             ),
             ConstrainedNumber(
                 name="percentbeveled",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=100
             ),
             ConstrainedNumber(
                 name="rotate",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=360
             ),
             ConstrainedNumber(
                 name="tilt",
                 required=False,
+                enforce_int=True,
                 min=0,
                 max=360
             ),

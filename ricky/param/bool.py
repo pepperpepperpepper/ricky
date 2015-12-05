@@ -17,15 +17,16 @@ class Bool(Param):
     value = property(value_get, value_set)
 
     def _bool_correct(self, value):
-        if any in [
-                   re.match(r'(true|1)', value, re.IGNORECASE),
-                   value == 1,
-                  ]:
+        value = str(value)
+        if any([
+            re.match(r'(true|1)', value, re.IGNORECASE),
+            value == 1
+        ]):
             value = True
-        elif any in [
-                     re.match(r'(false|0)', value, re.IGNORECASE),
-                     value == 0,
-                    ]:
+        elif any([
+            re.match(r'(false|0)', value, re.IGNORECASE),
+            value == 0
+        ]):
             value = False
         else:
             raise ValueError("Bad Value for Bool %s" % value)
