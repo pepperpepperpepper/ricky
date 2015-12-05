@@ -16,9 +16,7 @@ class Params(object):
 
     def __str__(self):
         """string representation"""
-        return pprint.pformat(
-            [{param.name: param._value} for param in self._params]
-        )
+        return pprint.pformat(self.as_dict())
 
     def randomize(self):
         """assign random values to all params, taking into account weight"""
@@ -41,10 +39,7 @@ class Params(object):
 
     def as_dict(self):
         """displays the params names and values in dictionary form"""
-        result = {}
-        for param in self._params:
-            result[param.name] = param.value
-        return result
+        return [param.as_dict() for param in self._params]
 
     def from_dict(self, params_dict):
         """set param values manually from a dictionary"""

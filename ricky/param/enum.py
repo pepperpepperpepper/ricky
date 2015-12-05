@@ -31,3 +31,8 @@ class Enum(Param):
 
     def randomize(self):
         self.value_set(random.choice(self._options))
+
+    def as_dict(self):
+        my_dict = super(Enum, self).as_dict()
+        my_dict['options'] = self._options
+        return my_dict
