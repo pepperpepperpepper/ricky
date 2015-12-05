@@ -10,14 +10,6 @@ class Color(Param):
     def from_rgb(cls, r, g, b):
         return cls(value="rgb({},{},{})".format(r, g, b))
 
-    @property
-    def value(self):
-        return super(Color, self).value_get()
-
-    @value.setter
-    def value(self, value):
-        self._value = value
-
     def randomize(self):
         self.value = "rgb(%s,%s,%s)" % (
             random.randint(0, 255),

@@ -38,8 +38,13 @@ class Params(object):
         return self.api.call(self)
 
     def as_dict(self):
-        """displays the params names and values in dictionary form"""
-        return [param.as_dict() for param in self._params]
+        """displays the params names and values in dictionary form
+           used by the api call
+        """
+        result = {}
+        for param in self._params:
+            result[param.name] = param.value
+        return result
 
     def from_dict(self, params_dict):
         """set param values manually from a dictionary"""

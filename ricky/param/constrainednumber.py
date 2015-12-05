@@ -12,6 +12,7 @@ class ConstrainedNumber(Param):
         self.forbidden_range_min = kwargs.get('forbidden_range_min')
         self.forbidden_range_max = kwargs.get('forbidden_range_max')
         self.enforce_int = kwargs.get('enforce_int')
+        self.prec = kwargs.get('prec')
         if "default" not in kwargs:
             self.randomize()
             kwargs["default"] = self._value
@@ -69,6 +70,8 @@ class ConstrainedNumber(Param):
 
     def _generate_random(self):
         value = random.uniform(self.range_min, self.range_max)
+        if self.prec:
+            value = round(value, self.prec)
         if self.enforce_int:
             value = int(value)
         self.value = value
