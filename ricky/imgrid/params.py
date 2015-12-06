@@ -1,5 +1,4 @@
-import random
-from ricky.params import Params
+from ricky.params import Params as _Params
 from ricky.param.username import Username
 from ricky.param.imageurl import ImageUrl
 from ricky.param.enum import Enum
@@ -22,73 +21,7 @@ _FILETYPE_OPTIONS = [
 ]
 
 
-class Param_Zoom(ConstrainedNumber):
-    def __init__(self, **kwargs):
-        super(Param_Zoom, self).__init__(**kwargs)
-        self.exclusion_range = kwargs['exclusion_range']
-
-    def test_value(self):
-        return not (
-            (self.value > self.exclusion_range[0]) and
-            (self.value < self.exclusion_range[1])
-        )
-
-    def randomize(self):
-        weights_total = sum(
-            map(lambda x: x["weight"], self.probabilities())
-        ) + 10
-        choice = random.randint(0, weights_total)
-        position = 0
-        for elem in self.probabilities():
-            position += elem["weight"]
-            if position >= choice:
-                self.value = elem["value"]
-                return
-        max_tries = 10000
-        while(max_tries):
-            self.value = round(
-                random.uniform(self.range_max, self.range_min), 2
-            )
-            if self.test_value:
-                return
-            max_tries -= 1
-        raise ValueError
-
-    @property
-    def value(self):
-        return super(Enum, self).value_get()
-
-    @value.setter
-    def value(self, value):
-        self._value = value
-        if self._value is not None:
-            self.is_ready = 1
-        self.set_by_user = 1
-
-
-class Param_Opacity(ConstrainedNumber):
-    def __init__(self, **kwargs):
-        super(Param_Opacity, self).__init__(**kwargs)
-
-    def randomize(self):
-        weights_total = sum(
-            map(
-                lambda x: x["weight"], self.probabilities()
-            ) + self.range_max - self.range_min
-        )
-        choice = random.randint(0, weights_total)
-        position = 0
-        for elem in self.probabilities():
-            position += elem["weight"]
-            if position >= choice:
-                self.value = elem["value"]
-                return
-        self.value = round(
-            random.uniform(self.range_min, self.range_max), 2
-        )
-
-
-class ImGridParams(Params):
+class Params(_Params):
     def __init__(self):
         self._params = (
            Username(name="username", required=False),
@@ -109,42 +42,80 @@ class ImGridParams(Params):
            Color(name="planebgcolor", required=False),
            Color(name="bgcolor", required=False),
            Color(name="linecolor", required=False),
-           ConstrainedNumber(name="swing", required=False, min=-170, max=170),
-           ConstrainedNumber(name="tilt", required=False, min=-170, max=170),
-           ConstrainedNumber(name="roll", required=False, min=-170, max=170),
-           ConstrainedNumber(name="width", required=False, min=100, max=800),
-           ConstrainedNumber(name="height", required=False, min=100, max=800),
+           ConstrainedNumber(
+               name="swing",
+               required=False,
+               enforce_int=True,
+               min=-170,
+               max=170),
+           ConstrainedNumber(
+               name="tilt",
+               required=False,
+               enforce_int=True,
+               min=-170,
+               max=170),
+           ConstrainedNumber(
+               name="roll",
+               required=False,
+               enforce_int=True,
+               min=-170,
+               max=170),
+           ConstrainedNumber(
+               name="width",
+               required=False,
+               enforce_int=True,
+               min=100,
+               max=800),
+           ConstrainedNumber(
+               name="height",
+               required=False,
+               enforce_int=True,
+               min=100,
+               max=800),
            ConstrainedNumber(
                name="linethickness",
                required=False,
+               enforce_int=True,
                min=1,
                max=30
            ),
-           ConstrainedNumber(name="opacity", required=False, min=0, max=1),
-           ConstrainedNumber(name="spacing", required=False, min=2, max=100),
+           ConstrainedNumber(
+               name="opacity", required=False, min=0, max=1, prec=2),
+           ConstrainedNumber(
+               name="spacing",
+               enforce_int=True,
+               required=False,
+               min=2,
+               max=100),
            Bool(name="vlines", required=False),
            Bool(name="hlines", required=False),
            Bool(name="trim", required=False),
            Bool(name="shadow", required=False),
-           Param_Zoom(
+           ConstrainedNumber(
                name="zoom",
                required=False,
                min=-12,
                max=12,
-               exclusion_range=[-1.1, 1.1]
+               forbidden_range_min=-1.1,
+               forbidden_range_max=1.1,
+               prec=1
            )
         )
 
-    def test_values(self):
+    def _test_values(self):
         return not any([
-          (self.param('spacing').value > self.param('width').value),
-          (self.param('spacing').value > self.param('height').value),
-          (self.param('linethickness').value > self.param('width').value),
-          (self.param('linethickness').value > self.param('height').value),
+          (self.__getitem__('spacing').value >
+              self.__getitem__('width').value),
+          (self.__getitem__('spacing').value >
+              self.__getitem__('height').value),
+          (self.__getitem__('linethickness').value >
+              self.__getitem__('width').value),
+          (self.__getitem__('linethickness').value >
+              self.__getitem__('height').value),
         ])
 
     def randomize(self):
-        p = self.params
+        p = self._params
         for el in p:
             if el in ['spacing', 'linethickness']:
                 continue
@@ -152,8 +123,8 @@ class ImGridParams(Params):
         for name in ['spacing', 'linethickness']:
             max_tries = 10000
             while(max_tries):
-                self.param(name).randomize()
-                if self.test_values():
+                self.__getitem__(name).randomize()
+                if self._test_values():
                     return
                 max_tries -= 1
             raise ValueError

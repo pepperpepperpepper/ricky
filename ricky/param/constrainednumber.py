@@ -39,16 +39,12 @@ class ConstrainedNumber(Param):
                 "Value %s is forbidden" % value
             )
         if (self.forbidden_range_max or self.forbidden_range_max == 0) and \
-                self.forbidden_range_max >= value:
+           (self.forbidden_range_min or self.forbidden_range_min == 0) and \
+           self.forbidden_range_min <= value and \
+           self.forbidden_range_max >= value:
                 raise ValueError(
-                    "In forbidden range: Value %s is below %s" %
-                    (value, self.forbidden_range_max)
-                )
-        if (self.forbidden_range_min or self.forbidden_range_min == 0) and \
-                self.forbidden_range_min <= value:
-                raise ValueError(
-                    "In forbidden range: Value %s is above %s" %
-                    (value, self.forbidden_range_min)
+                    "In forbidden range: Value %s is above %s and below %s" %
+                    (value, self.forbidden_range_min, self.forbidden_range_max)
                 )
         if self.enforce_int and type(value) != int:
             raise ValueError(
@@ -77,15 +73,15 @@ class ConstrainedNumber(Param):
             value = int(value)
         self.value = value
 
-    def randomize(self):
-        tries = 0
+    def randomize(self, tries=0):
         tries_max = 30
         try:
             self._generate_random()
         except ValueError:
             tries += 1
+            print "TRIES:%s\n" % tries
             if tries < tries_max:
-                self._generate_random()
+                self.randomize(tries=tries)
             else:
                 raise ValueError(
                     "Unable to set random value on %s in %s tries"
