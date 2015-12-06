@@ -1,4 +1,5 @@
 import random
+import decimal
 from ricky.param import Param
 DEFAULT_RAND_MAX = 1000
 DEFAULT_RAND_MIN = -1000
@@ -89,3 +90,14 @@ class ConstrainedNumber(Param):
                 raise ValueError(
                     "Unable to set random value on %s in %s tries"
                 ) % (self.name, self.tries_max)
+
+    def from_normalized(self, value):
+        total_range = self.range_max - self.range_min
+        val_in_range = hex(int(round(total_range * value, 0)))
+        self.value = val_in_range + self.range_min
+
+    def as_normalized(self):
+        total_range = self.range_max - self.range_min
+        return decimal.Decimal(
+            self.value + self.range_min
+        )/decimal.Decimal(total_range)

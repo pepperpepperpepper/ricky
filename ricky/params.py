@@ -7,7 +7,7 @@ class Params(object):
         self._api = None
         self._params = args
 
-    def param(self, name):
+    def __getitem__(self, name):
         """getter for the param by name"""
         for param in self._params:
             if param.name == name:

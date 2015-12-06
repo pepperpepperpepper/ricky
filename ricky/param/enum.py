@@ -1,10 +1,11 @@
 import random
 from ricky.param import Param
+import decimal
 
 
 class Enum(Param):
     def __init__(self, options=None, **kwargs):
-        self._options = options
+        self._options = set(options)
         if not self._options:
             raise ValueError("Object must be initialized with options set")
         super(Enum, self).__init__(**kwargs)
@@ -36,3 +37,13 @@ class Enum(Param):
         my_dict = super(Enum, self).as_dict()
         my_dict['options'] = self._options
         return my_dict
+
+    def from_normalized(self, value):
+        maximum = len(self._options - 1)
+        idx_val = int(round(maximum * value, 0))
+        self.value = self._options[idx_val]
+
+    def as_normalized(self):
+        maximum = len(self._options - 1)
+        value = int(self.as_hex(), 16)
+        return decimal.Decimal(value)/decimal.Decimal(maximum)

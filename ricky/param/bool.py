@@ -34,3 +34,10 @@ class Bool(Param):
 
     def randomize(self):
         self.value_set(random.choice([True, False]))
+
+    def from_normalized(self, value):
+        value_as_int = int(round(value, 0))
+        self.value = True if value_as_int else False
+
+    def as_normalized(self):
+        return 1 if self.value else 0

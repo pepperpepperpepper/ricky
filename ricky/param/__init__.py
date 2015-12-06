@@ -55,3 +55,9 @@ class Param(object):
 
     def randomize(self):
         pass
+
+    def from_normalized(self, value):
+        pass
+
+    def as_normalized(self):
+        return 0
