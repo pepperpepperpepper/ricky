@@ -2,9 +2,10 @@
 from ricky.imgradient import ImGradient
 from ricky.imbreak import ImBreak
 from ricky.imgrid import ImGrid
+from ricky.impattern import ImPattern
 
 
-api = ImGrid()
+api = ImPattern()
 params = api.params_init()
 print params
 params.randomize()
