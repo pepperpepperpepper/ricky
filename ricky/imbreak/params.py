@@ -47,6 +47,7 @@ class ImBreakParams(Params):
            ConstrainedNumber(
                        name="breakangle",
                        required=False,
+                       enforce_int=True,
                        min=-180,
                        max=180),
            Enum(

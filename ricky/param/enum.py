@@ -5,7 +5,7 @@ import decimal
 
 class Enum(Param):
     def __init__(self, options=None, **kwargs):
-        self._options = set(options)
+        self._options = tuple(options)
         if not self._options:
             raise ValueError("Object must be initialized with options set")
         super(Enum, self).__init__(**kwargs)
