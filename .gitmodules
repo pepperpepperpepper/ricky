@@ -1,0 +1,3 @@
+[submodule "photoblaster"]
+	path = photoblaster
+	url = git@ghghgh.us:photoblaster/photoblaster.git
