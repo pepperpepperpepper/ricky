@@ -1,11 +1,11 @@
 #!/usr/bin/python2.7
-from ricky.imgradient import ImGradient
-from ricky.imbreak import ImBreak
-from ricky.imgrid import ImGrid
-from ricky.impattern import ImPattern
+from ricky.pbgradient import PbGradient
+from ricky.pbbreaker import PbBreaker
+from ricky.pbgrid import PbGrid
+from ricky.pbpattern import PbPattern
 
 
-api = ImPattern()
+api = PbPattern()
 params = api.params_init()
 print params
 params.randomize()

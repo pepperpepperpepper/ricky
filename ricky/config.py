@@ -9,3 +9,4 @@ IMPATTERN_URL = "http://localhost:8999/im/api/impattern"
 IMGRID_URL = "http://localhost:8999/im/api/imgrid"
 IMGRADIENT_URL = "http://localhost:8999/im/api/imgradient"
 IMBREAK_URL = "http://localhost:8999/im/api/imbreak"
+OFFLINE = False
