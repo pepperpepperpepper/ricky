@@ -66,7 +66,7 @@ class Param(object):
             if position >= choice:
                 self.value = elem["value"]
                 return True
-        return True
+        return False
 
     def randomize(self, probabilities=None):
         pass

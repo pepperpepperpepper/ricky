@@ -1,6 +1,6 @@
 {
     "breaktype" :[
-        {"value": "CLASSIC", "weight": 1},
+        {"value": "CLASSIC", "weight": 25},
         {"value": "REDUX", "weight": 1},
         {"value": "BLURRY_BREAK", "weight": 1},
         {"value": "BLURRY_BREAK_2", "weight": 1},
@@ -23,13 +23,13 @@
         {"value": "gif", "weight": 2}
     ],
     "breakangle" :[
-        {"value": 0, "weight": 9},
+        {"value": 0, "weight": 90},
         {"value": 90, "weight": 2},
         {"value": -180, "weight": 2},
         {"value": 180, "weight": 2}
     ],
     "expanded" :[
-        {"value": "", "weight": 11},
-        {"value": 1, "weight": 2}
+        {"value": "false", "weight": 50},
+        {"value": "true", "weight": 50}
     ]
 }
