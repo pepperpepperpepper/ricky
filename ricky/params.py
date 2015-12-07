@@ -18,10 +18,22 @@ class Params(object):
         """string representation"""
         return pprint.pformat(self.as_dict())
 
-    def randomize(self):
-        """assign random values to all params, taking into account weight"""
+    def randomize(
+            self,
+            probabilities=None,
+            probabilities_local=False
+            ):
+        """assign random values to all params
+        if using a probabilities.json file, weight is taken
+        into account"""
+        if probabilities:
+            probabilities = self._load_probabilities(probabilities)
+        else if probabilities_local:
+            probabilities = self._load_probabilities(probabilities_local)
+        else:
+            probabilities = {}
         for param in self._params:
-            param.randomize()
+            param.randomize(probability=probabilities.get(param.name))
 
     @property
     def api(self):
