@@ -1,4 +1,5 @@
 import pprint
+import random
 
 
 class Param(object):
@@ -53,7 +54,21 @@ class Param(object):
 
     default = property(default_get, default_set)
 
-    def randomize(self):
+    def _choose_from_probabilities(self, probabilities):
+        """
+            if using weights, considers all weights as a percentage of
+            100
+        """
+        choice = random.randint(0, 100)
+        position = 0
+        for elem in probabilities:
+            position += elem["weight"]
+            if position >= choice:
+                self.value = elem["value"]
+                return True
+        return True
+
+    def randomize(self, probabilities=None):
         pass
 
     def from_normalized(self, value):

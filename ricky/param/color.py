@@ -35,10 +35,11 @@ class Color(Param):
         value = int(self.as_hex(), 16)
         return decimal.Decimal(value)/decimal.Decimal(maximum)
 
-    def randomize(self):
+    def randomize(self, probabilities=None):
+        if probabilities and self._choose_from_probabilities(probabilities):
+            return
         self.value = "rgb(%s,%s,%s)" % (
             random.randint(0, 255),
             random.randint(0, 255),
             random.randint(0, 255)
         )
-        self._is_rgb = True

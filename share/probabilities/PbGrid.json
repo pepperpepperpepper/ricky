@@ -26,28 +26,31 @@
         { "value" : "silver", "weight" : 1 },
         { "value" : null, "weight" : 10 }
     ],
-
     "linecolor" : [
         { "value" : "black", "weight" : 1 },
         { "value" : "white", "weight" : 1 },
         { "value" : "silver", "weight" : 1 }
     ],
     "swing" : [
-        {"value": ",  "weight": 2},
+        {"value": "",  "weight": 2},
         {"value": 30,   "weight": 1},
         {"value": -30,   "weight": 1}
     ],
     "tilt" : [
-        {"value": ",  "weight": 2},
+        {"value": "",  "weight": 2},
         {"value": 30,   "weight": 1},
         {"value": -30,   "weight": 1}
     ],
     "roll" : [
-        {"value": ",  "weight": 2},
+        {"value": "",  "weight": 2},
         {"value": 30,   "weight": 1},
         {"value": -30,   "weight": 1}
     ],
-    "width" : "height" : [
+    "width" : [
+        { "value" : 400, "weight" : 1 },
+        { "value" : 600, "weight" : 1 }
+    ],
+    "height" : [
         { "value" : 400, "weight" : 1 },
         { "value" : 600, "weight" : 1 }
     ],
@@ -64,15 +67,15 @@
         {"value":15,  "weight": 1}
     ],
     "vlines" : [
-        {"value":",  "weight": 2},
+        {"value": "",  "weight": 2},
         {"value":"true",   "weight": 1}
     ],
     "hlines" : [
-        {"value":",  "weight": 2},
+        {"value": "",  "weight": 2},
         {"value":"true",   "weight": 1}
     ],
     "shadow" : [
-        {"value":",  "weight": 1},
+        {"value": "",  "weight": 1},
         {"value":"true",   "weight": 1}
     ],
     "zoom" : [
@@ -81,7 +84,7 @@
         {"value": -1.2,  "weight": 1}
     ],
     "trim" : [
-        {"value":",  "weight": 1},
+        {"value": "",  "weight": 1},
         {"value":"true",   "weight": 1}
     ]
 }

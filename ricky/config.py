@@ -10,3 +10,4 @@ IMGRID_URL = "http://localhost:8999/im/api/imgrid"
 IMGRADIENT_URL = "http://localhost:8999/im/api/imgradient"
 IMBREAK_URL = "http://localhost:8999/im/api/imbreak"
 OFFLINE = False
+PROBABILITIES_DIR = "share/probabilities"

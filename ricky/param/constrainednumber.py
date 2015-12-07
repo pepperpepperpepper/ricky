@@ -73,7 +73,9 @@ class ConstrainedNumber(Param):
             value = int(value)
         self.value = value
 
-    def randomize(self, tries=0):
+    def randomize(self, tries=0, probabilities=None):
+        if probabilities and self._choose_from_probabilities(probabilities):
+            return
         tries_max = 30
         try:
             self._generate_random()

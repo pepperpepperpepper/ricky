@@ -5,7 +5,7 @@ from ricky.pbgrid import PbGrid
 from ricky.pbpattern import PbPattern
 
 
-api = PbPattern()
+api = PbBreaker()
 params = api.params_init()
 print params
 params.randomize()

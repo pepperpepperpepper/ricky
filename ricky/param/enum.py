@@ -30,8 +30,10 @@ class Enum(Param):
 
     value = property(value_get, value_set)
 
-    def randomize(self):
-        self.value_set(random.choice(self._options))
+    def randomize(self, probabilities=None):
+        if probabilities and self._choose_from_probabilities(probabilities):
+            return
+        self.value = random.choice(self._options)
 
     def as_dict(self):
         my_dict = super(Enum, self).as_dict()

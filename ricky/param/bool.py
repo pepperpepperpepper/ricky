@@ -32,8 +32,10 @@ class Bool(Param):
             raise ValueError("Bad Value for Bool %s" % value)
         return value
 
-    def randomize(self):
-        self.value_set(random.choice([True, False]))
+    def randomize(self, probabilities=None):
+        if probabilities and self._choose_from_probabilities(probabilities):
+            return
+        self.value = random.choice([True, False])
 
     def from_normalized(self, value):
         value_as_int = int(round(value, 0))

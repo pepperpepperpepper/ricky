@@ -1,5 +1,9 @@
 """base class for all params"""
 import pprint
+import simplejson as json
+import sys
+import os
+from ricky.config import PROBABILITIES_DIR
 
 
 class Params(object):
@@ -18,6 +22,28 @@ class Params(object):
         """string representation"""
         return pprint.pformat(self.as_dict())
 
+    def _load_probabilities_json(self, probabilities_file=None):
+        if probabilities_file:
+            filepath = probabilities_file
+        else:
+            filepath = os.path.join(
+                PROBABILITIES_DIR,
+                "%s.json" % (self.api.__class__.__name__)
+            )
+        try:
+            f = open(filepath, 'r')
+            data = f.read()
+            f.close()
+            return json.loads(data)
+        except json.scanner.JSONDecodeError as e:
+            sys.stderr.write("Invalid Json - Problem decoding %s\n" % filepath)
+            sys.stderr.write("%s\n" % e)
+            sys.exit(1)
+        except IOError:
+            sys.stderr.write(
+                "Could not find probabilities file %s\n" % filepath)
+            sys.exit(1)
+
     def randomize(
             self,
             probabilities=None,
@@ -27,13 +53,13 @@ class Params(object):
         if using a probabilities.json file, weight is taken
         into account"""
         if probabilities:
-            probabilities = self._load_probabilities(probabilities)
-        else if probabilities_local:
-            probabilities = self._load_probabilities(probabilities_local)
+            probabilities_dict = self._load_probabilities_json(probabilities)
+        elif probabilities_local:
+            probabilities_dict = self._load_probabilities_json()
         else:
-            probabilities = {}
+            probabilities_dict = {}
         for param in self._params:
-            param.randomize(probability=probabilities.get(param.name))
+            param.randomize(probabilities=probabilities_dict.get(param.name))
 
     @property
     def api(self):
