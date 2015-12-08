@@ -14,17 +14,36 @@ class ConstrainedNumber(Param):
         self.forbidden_range_max = kwargs.get('forbidden_range_max')
         self.enforce_int = kwargs.get('enforce_int')
         self.prec = kwargs.get('prec')
+        super(ConstrainedNumber, self).__init__(**kwargs)
         if "default" not in kwargs:
             self.randomize()
             kwargs["default"] = self._value
-        super(ConstrainedNumber, self).__init__(**kwargs)
 
     @property
     def value(self):
-        return super(ConstrainedNumber, self).value_get()
+         return self._value
+#        self._set_by_user = True  # FIXME
+#        return super(ConstrainedNumber, self).value_get()
 
     @value.setter
     def value(self, value):
+        if not self.required and value in ["", None]:
+            return
+        if self.enforce_int:
+            try:
+                value = int(value)
+            except ValueError:
+                raise ValueError(
+                    "Value %s for %s is not an int" % (value, self.name)
+                )
+        else:
+            try:
+                value = decimal.Decimal(value)
+            except ValueError:
+                raise ValueError(
+                    "Value %s for %s is not a valid number type" %
+                    (value, self.name)
+                )
         if value is not None and (
             value < self.range_min or
             value > self.range_max
@@ -51,10 +70,6 @@ class ConstrainedNumber(Param):
                         self.forbidden_range_max
                     )
                 )
-        if self.enforce_int and type(value) != int:
-            raise ValueError(
-               "Value %s is not an int" % value
-            )
         self._value = value
 
     def __str__(self):

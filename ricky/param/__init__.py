@@ -10,14 +10,13 @@ class Param(object):
                  name=None,
                  **kwargs
                 ):
-        self._value_default = None
         self.name = name
         self.required = required
         self._value_default = kwargs.get("default") or None
 
         if not hasattr(self, "set_by_user"):
             self._set_by_user = set_by_user
-        if self.value is not None and \
+        if hasattr(self, "value") and self.value is not None and \
                 kwargs.get("value") is not None:
             self._value = kwargs.get("value")
         else:

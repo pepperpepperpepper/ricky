@@ -3,7 +3,7 @@ import urllib
 import urllib2
 import sys
 import simplejson as json
-from ricky.config import OFFLINE
+from ricky.config import OFFLINE, PB_DATA_URL
 
 
 class Pb(object):
@@ -12,7 +12,7 @@ class Pb(object):
         self.url = ""
         self._offline = OFFLINE
 
-    def post_request(self, url, params):
+    def http_request(self, url, params={}):
         params = urllib.urlencode(params)
         headers = {
             "Content-type": "application/x-www-form-urlencoded",
@@ -24,7 +24,10 @@ class Pb(object):
             "Accept": "text/plain"
         }
         try:
-            req = urllib2.Request(url, params, headers)
+            if params:
+                req = urllib2.Request(url, params, headers)
+            else:
+                req = urllib2.Request(url, params, headers)
             response = urllib2.urlopen(req)
             return response.read()
         except ValueError:
@@ -53,22 +56,26 @@ class Pb(object):
                         instance.file_s3move()
                     return instance.file_dict()
         return json.loads(
-            self.post_request(self.url, params.as_dict())
+            self.http_request(self.url, params=params.as_dict())
         )
 
-    def params_from_url(self, url):
+    def data_from_url(self, url):
         """
         retrieves image params from db using the url
         """
+        newfile = os.path.split(url)[-1]
         if self._offline:
             sys.path.append("./photoblaster")
             from photoblaster.db.models.imcmd import ImCmd
-            newfile = os.path.split(url)[-1]
-            files = ImCmd.search({"newfile": newfile})
-            if not len(files):
+            result = ImCmd.search(newfile=newfile).first()
+            try:
+                return {
+                    "module": result.tag.split(":")[0],
+                    "params": json.loads(result.dataobj)
+                }
+            except AttributeError:
+                sys.stderr.write("No usable data found in db\n")
                 return None
-            filedata = json.loads(files[0].dataobj)
-            return filedata
         else:
-            # needs a route
+            print self.http_request("%s?newfile=%s" % (PB_DATA_URL, newfile))
             raise NotImplementedError("Not yet implemented\n")
