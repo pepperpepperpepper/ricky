@@ -30,21 +30,26 @@ class ConstrainedNumber(Param):
             value > self.range_max
         ):
             raise ValueError(
-                "Value must be between %s and %s\n" % (
-                    self.range_min, self.range_max
+                "Value for %s must be between %s and %s\n" % (
+                    self.name, self.range_min, self.range_max
                 )
             )
         if value == self.forbidden:
             raise ValueError(
-                "Value %s is forbidden" % value
+                "Value %s for %s is forbidden" % (value, value.name)
             )
         if (self.forbidden_range_max or self.forbidden_range_max == 0) and \
            (self.forbidden_range_min or self.forbidden_range_min == 0) and \
            self.forbidden_range_min <= value and \
            self.forbidden_range_max >= value:
                 raise ValueError(
-                    "In forbidden range: Value %s is above %s and below %s" %
-                    (value, self.forbidden_range_min, self.forbidden_range_max)
+                    "In forbidden range: " +
+                    "Value %s for %s is above %s and below %s" % (
+                        value,
+                        self.name,
+                        self.forbidden_range_min,
+                        self.forbidden_range_max
+                    )
                 )
         if self.enforce_int and type(value) != int:
             raise ValueError(
@@ -81,7 +86,6 @@ class ConstrainedNumber(Param):
             self._generate_random()
         except ValueError:
             tries += 1
-            print "TRIES:%s\n" % tries
             if tries < tries_max:
                 self.randomize(tries=tries)
             else:

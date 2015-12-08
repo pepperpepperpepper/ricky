@@ -88,4 +88,4 @@ class Params(object):
         """set param values manually from a dictionary"""
         for param in self._params:
             if param.name in params_dict.keys():
-                param.value_set(params_dict[param.name])
+                param.value = params_dict[param.name]

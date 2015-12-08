@@ -1,3 +1,4 @@
+import os
 import urllib
 import urllib2
 import sys
@@ -41,9 +42,9 @@ class Pb(object):
     def call(self, params):
         if self._offline:
             sys.path.append("./photoblaster")
-            from photoblaster.modules import Pb
+            from photoblaster.modules import Pb as _Pb
             from photoblaster.config import LOCAL as PBLOCAL
-            for pbcls in Pb.__subclasses__():
+            for pbcls in _Pb.__subclasses__():
                 if pbcls.__name__ == self.__class__.__name__:
                     params_dict = params.as_dict()
                     instance = pbcls(**params_dict)
@@ -54,3 +55,20 @@ class Pb(object):
         return json.loads(
             self.post_request(self.url, params.as_dict())
         )
+
+    def params_from_url(self, url):
+        """
+        retrieves image params from db using the url
+        """
+        if self._offline:
+            sys.path.append("./photoblaster")
+            from photoblaster.db.models.imcmd import ImCmd
+            newfile = os.path.split(url)[-1]
+            files = ImCmd.search({"newfile": newfile})
+            if not len(files):
+                return None
+            filedata = json.loads(files[0].dataobj)
+            return filedata
+        else:
+            # needs a route
+            raise NotImplementedError("Not yet implemented\n")
