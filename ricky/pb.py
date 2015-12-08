@@ -26,14 +26,28 @@ class Pb(object):
             req = urllib2.Request(url, params, headers)
             response = urllib2.urlopen(req)
             return response.read()
-        except urllib.error.HTTPError:
-            sys.stderr.write("Post Request failed!")
+        except ValueError:
+            sys.stderr.write(
+                "Bad Post params or Url sent to photoblaster"
+                "api.\n"
+            )
+        except urllib2.URLError:
+            sys.stderr.write(
+                "Could not complete post request to the given url:\n" +
+                ("URL: %s\n" % url) +
+                ("PARAMS: %s\n" % params)
+            )
 
     def call(self, params):
         if self._offline:
             sys.path.append("./photoblaster")
             from photoblaster.modules import Pb
-            pass
+            for pbcls in Pb.__subclasses__():
+                if pbcls.__name__ == self.__class__.__name__:
+                    params_dict = params.as_dict()
+                    instance = pbcls(**params_dict)
+                    instance.create()
+                    return instance.file_dict()
         return json.loads(
             self.post_request(self.url, params.as_dict())
         )
