@@ -3,7 +3,8 @@ import pprint
 import simplejson as json
 import sys
 import os
-from ricky.config import PROBABILITIES_DIR
+from ricky.config import PROBABILITIES_DIR, OFFLINE
+import ricky.utils as utils
 
 
 class Params(object):
@@ -74,7 +75,21 @@ class Params(object):
 
     def execute(self):
         """calls the associated api"""
-        return self.api.call(self)
+        if OFFLINE:
+            sys.path.append("./photoblaster")
+            from photoblaster.modules import Pb as _Pb
+            from photoblaster.config import LOCAL as PBLOCAL
+            for pbcls in _Pb.__subclasses__():
+                if pbcls.__name__ == self.__class__.__name__:
+                    params_dict = self.as_dict()
+                    instance = pbcls(**params_dict)
+                    instance.create()
+                    if not PBLOCAL:
+                        instance.file_s3move()
+                    return instance.file_dict()
+        return json.loads(
+            utils.http_request(self._url, params=self.as_dict())
+        )
 
     def as_dict(self):
         """displays the params names and values in dictionary form

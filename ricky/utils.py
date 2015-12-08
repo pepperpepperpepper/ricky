@@ -1,6 +1,31 @@
+import os
 import sys
 import urllib
 import urllib2
+import simplejson as json
+from ricky.config import OFFLINE, PB_DATA_URL
+
+
+def data_from_url(url):
+    """
+    retrieves image params from db using the url
+    """
+    newfile = os.path.split(url)[-1]
+    if OFFLINE:
+        sys.path.append("./photoblaster")
+        from photoblaster.db.models.imcmd import ImCmd
+        result = ImCmd.search(newfile=newfile).first()
+        try:
+            return {
+                "module": result.tag.split(":")[0],
+                "params": json.loads(result.dataobj)
+            }
+        except AttributeError:
+            sys.stderr.write("No usable data found in db\n")
+            return None
+    else:
+        print http_request("%s?newfile=%s" % (PB_DATA_URL, newfile))
+        raise NotImplementedError("Not yet implemented\n")
 
 
 def http_request(url, params={}):

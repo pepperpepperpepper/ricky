@@ -3,7 +3,7 @@ from ricky.pbgradient import PbGradient
 from ricky.pbbreaker import PbBreaker
 from ricky.pbgrid import PbGrid
 from ricky.pbpattern import PbPattern
-
+import ricky.utils as utils
 
 api = PbGradient()
 params = api.params_init()
@@ -11,7 +11,7 @@ params.randomize()
 print params
 #print params
 #print params.execute()
-data = api.data_from_url(
+data = utils.data_from_url(
     "http://i.asdf.us/im/8f/PbGradientblue4-DarkGreen_1448917630.png"
 )
 params.from_dict(data['params'])
