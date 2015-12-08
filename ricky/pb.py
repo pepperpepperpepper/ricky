@@ -24,7 +24,7 @@ class Pb(object):
                         instance.file_s3move()
                     return instance.file_dict()
         return json.loads(
-            utils.http_request(self.url, params=params.as_dict())
+            utils.http_request(params._url, params=params.as_dict())
         )
 
     def data_from_url(self, url):

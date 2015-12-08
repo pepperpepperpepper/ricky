@@ -15,13 +15,8 @@ def _add_pb_base(path):
     return os.path.join(PB_BASE, path)
 
 PATTERN_URL_BASE = _add_pb_base("impattern/patterns")
-IMPATTERN_URL = _add_pb_base("im/api/impattern")
-IMGRID_URL = _add_pb_base("im/api/imgrid")
-IMGRADIENT_URL = _add_pb_base("im/api/imgradient")
-IMBREAK_URL = _add_pb_base("im/api/imbreak")
 PB_DATA_URL = _add_pb_base("im/data")
 
-# aliased for merge
 PBPATTERN_URL = _add_pb_base("im/api/impattern")
 PBGRID_URL = _add_pb_base("im/api/imgrid")
 PBGRADIENT_URL = _add_pb_base("im/api/imgradient")
