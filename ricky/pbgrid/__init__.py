@@ -9,6 +9,5 @@ class PbGrid(Pb):
 
     def params_init(self):
         new_params = Params()
-        # new_params = self.get_from_server()
         new_params.api = self
         return new_params

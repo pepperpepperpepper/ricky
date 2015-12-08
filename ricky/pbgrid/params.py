@@ -5,6 +5,7 @@ from ricky.param.enum import Enum
 from ricky.param.constrainednumber import ConstrainedNumber
 from ricky.param.color import Color
 from ricky.param.bool import Bool
+from ricky.config import PBGRID_URL
 
 _TRANSITION_OPTIONS = [
     "background",
@@ -23,7 +24,7 @@ _FILETYPE_OPTIONS = [
 
 class Params(_Params):
     def __init__(self):
-        self._params = (
+        super(Params, self).__init__(
            Username(name="username", required=False),
            PbageUrl(name="bgimage", required=False),
            PbageUrl(name="imageinstead", required=False),
@@ -101,6 +102,7 @@ class Params(_Params):
                prec=1
            )
         )
+        self._url = PBGRID_URL
 
     def _test_values(self):
         return not any([

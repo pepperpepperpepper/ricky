@@ -4,7 +4,7 @@ from ricky.param.imageurl import PbageUrl
 from ricky.param.enum import Enum
 from ricky.param.constrainednumber import ConstrainedNumber
 from ricky.param.bool import Bool
-
+from ricky.config import PBBREAKER_URL
 
 _BREAKTYPE_OPTIONS = [
     "CLASSIC",
@@ -33,7 +33,7 @@ _FINALFORMAT_OPTIONS = [
 
 class Params(_Params):
     def __init__(self):
-        self._params = (
+        super(Params, self).__init__(
            Username(name="username", required=False),
            PbageUrl(name="url", required=True),
            Enum(
@@ -56,3 +56,4 @@ class Params(_Params):
                        options=_BREAKMODE_OPTIONS),
            Bool(name="expanded", required=False)
         )
+        self._url = PBBREAKER_URL

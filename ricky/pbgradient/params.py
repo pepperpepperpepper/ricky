@@ -4,7 +4,7 @@ from ricky.param.enum import Enum
 from ricky.param.constrainednumber import ConstrainedNumber
 from ricky.param.bool import Bool
 from ricky.param.color import Color
-
+from ricky.config import PBGRADIENT_URL
 
 _HALFTONE_OPTIONS = [
     "",
@@ -164,3 +164,4 @@ class Params(_Params):
                 required=False
             )
         )
+        self._url = PBGRADIENT_URL

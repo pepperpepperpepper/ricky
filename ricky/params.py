@@ -9,7 +9,8 @@ from ricky.config import PROBABILITIES_DIR
 class Params(object):
     def __init__(self, *args):
         self._api = None
-        self._params = args
+        self._url = None
+        self._params = tuple(args)
 
     def __getitem__(self, name):
         """getter for the param by name"""

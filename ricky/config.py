@@ -21,6 +21,12 @@ IMGRADIENT_URL = _add_pb_base("im/api/imgradient")
 IMBREAK_URL = _add_pb_base("im/api/imbreak")
 PB_DATA_URL = _add_pb_base("im/data")
 
+# aliased for merge
+PBPATTERN_URL = _add_pb_base("im/api/impattern")
+PBGRID_URL = _add_pb_base("im/api/imgrid")
+PBGRADIENT_URL = _add_pb_base("im/api/imgradient")
+PBBREAKER_URL = _add_pb_base("im/api/imbreak")
+
 # offline mode, true by default
 OFFLINE = True
 
