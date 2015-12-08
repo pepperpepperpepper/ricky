@@ -8,7 +8,7 @@ from ricky.pbpattern import PbPattern
 api = PbBreaker()
 params = api.params_init()
 print params
-params.randomize(probabilities_local=True)
+params.randomize()
 print params
 print params.execute()
 #print params['color1']

@@ -42,11 +42,14 @@ class Pb(object):
         if self._offline:
             sys.path.append("./photoblaster")
             from photoblaster.modules import Pb
+            from photoblaster.config import LOCAL as PBLOCAL
             for pbcls in Pb.__subclasses__():
                 if pbcls.__name__ == self.__class__.__name__:
                     params_dict = params.as_dict()
                     instance = pbcls(**params_dict)
                     instance.create()
+                    if not PBLOCAL:
+                        instance.file_s3move()
                     return instance.file_dict()
         return json.loads(
             self.post_request(self.url, params.as_dict())
