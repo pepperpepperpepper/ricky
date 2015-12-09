@@ -24,6 +24,8 @@ class Params(object):
         """string representation"""
         return pprint.pformat(self.as_dict())
 
+    def __len__(self):
+        return len(self._params)
     def _load_probabilities_json(self, probabilities_file=None):
         if probabilities_file:
             filepath = probabilities_file

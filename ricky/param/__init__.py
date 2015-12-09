@@ -74,4 +74,6 @@ class Param(object):
         pass
 
     def as_normalized(self):
+        if self.value:
+            return 1
         return 0
