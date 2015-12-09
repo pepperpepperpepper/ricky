@@ -1,25 +1,19 @@
 #!/usr/bin/python2.7
-from ricky.params.pbgradient import PbGradient
-from ricky.params.pbbreaker import PbBreaker
-from ricky.params.pbgrid import PbGrid
-from ricky.params.pbpattern import PbPattern
+import ricky.params
 import ricky.utils as utils
 
-params = PbGradient()
+params = ricky.params.PbGradient()
 params.randomize()
-params.execute()
+print params.execute()
 print params
-#print params
-#print params
-#print params.execute()
-#data = utils.data_from_url(
-#    "http://i.asdf.us/im/8f/PbGradientblue4-DarkGreen_1448917630.png"
-#)
-#params.from_dict(data['params'])
-#print params
-#print params['color1']
-#params['color1'].from_normalized(0.28187431585)
-#print params['color1']
-# print params.as_dict()
-# req = params.execute()
-# print req
+data = utils.data_from_url(
+    "/im/cache/PbGradientrgb-234,155,194-"
+    "-rgb-9,252,50-_1449620530_RICHARD_GIOVANNI.jpg"
+)
+print data
+for params_class in ricky.params.Params.__subclasses__():
+    if data['module'] == params_class.__name__:
+        params_instance = params_class()
+        print type(params_instance)
+        params_instance.from_dict(data['params'])
+        print params_instance.execute()

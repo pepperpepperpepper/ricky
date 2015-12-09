@@ -86,6 +86,7 @@ class Params(object):
                     instance.create()
                     if not PBLOCAL:
                         instance.file_s3move()
+                    instance.db_send()
                     return instance.file_dict()
         return json.loads(
             utils.http_request(self._url, params=self.as_dict())
@@ -105,3 +106,8 @@ class Params(object):
         for param in self._params:
             if param.name in params_dict.keys():
                 param.value = params_dict[param.name]
+
+from ricky.params.pbgradient import PbGradient
+from ricky.params.pbbreaker import PbBreaker
+from ricky.params.pbpattern import PbPattern
+from ricky.params.pbgrid import PbGrid
