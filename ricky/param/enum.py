@@ -41,11 +41,11 @@ class Enum(Param):
         return my_dict
 
     def from_normalized(self, value):
-        maximum = len(self._options - 1)
+        maximum = len(self._options) - 1
         idx_val = int(round(maximum * value, 0))
         self.value = self._options[idx_val]
 
     def as_normalized(self):
-        maximum = len(self._options - 1)
-        value = int(self.as_hex(), 16)
+        maximum = len(self._options) - 1
+        value = self._options.index(self.value)
         return decimal.Decimal(value)/decimal.Decimal(maximum)

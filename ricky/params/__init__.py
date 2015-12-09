@@ -101,6 +101,12 @@ class Params(object):
             result[param.name] = param.value
         return result
 
+    def as_normalized(self):
+        return tuple([
+            {'name': param.name, 'normalized': param.as_normalized()}
+            for param in self._params
+        ])
+
     def from_dict(self, params_dict):
         """set param values manually from a dictionary"""
         for param in self._params:

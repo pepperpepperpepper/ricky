@@ -17,3 +17,4 @@ for params_class in ricky.params.Params.__subclasses__():
         print type(params_instance)
         params_instance.from_dict(data['params'])
         print params_instance.execute()
+        print params_instance.as_normalized()
