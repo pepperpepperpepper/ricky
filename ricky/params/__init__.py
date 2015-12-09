@@ -107,6 +107,19 @@ class Params(object):
             for param in self._params
         ])
 
+    def as_serialized(self):
+        """
+        returns params in serialized form to use in a dataset
+        """
+        return tuple([param.as_normalized() for param in self._params])
+
+    def from_serialized(self, params_tuple):
+        """
+        sets params from serialized form as acquired from a dataset
+        """
+        for i in range(len(self._params)):
+            self._params[i].from_normalized(params_tuple[i])
+
     def from_dict(self, params_dict):
         """set param values manually from a dictionary"""
         for param in self._params:
