@@ -9,7 +9,6 @@ import ricky.utils as utils
 
 class Params(object):
     def __init__(self, *args):
-        self._api = None
         self._url = None
         self._params = tuple(args)
 
@@ -32,7 +31,7 @@ class Params(object):
         else:
             filepath = os.path.join(
                 PROBABILITIES_DIR,
-                "%s.json" % (self.api.__class__.__name__)
+                "%s.json" % (self.__class__.__name__)
             )
         try:
             f = open(filepath, 'r')
@@ -65,15 +64,7 @@ class Params(object):
         for param in self._params:
             param.randomize(probabilities=probabilities_dict.get(param.name))
 
-    @property
-    def api(self):
-        """property setter for im api"""
-        return self._api
 
-    @api.setter
-    def api(self, cls):
-        """property getter for im api"""
-        self._api = cls
 
     def execute(self):
         """calls the associated api"""
